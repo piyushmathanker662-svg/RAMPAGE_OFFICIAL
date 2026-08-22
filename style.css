@@ -22,11 +22,6 @@ input {
     font-family: inherit;
 }
 
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 :root {
     --green: #9cff00;
     --dark-green: #5f9900;
@@ -36,6 +31,11 @@ input {
     --red: #ff3333;
     --orange: #ffb000;
 }
+
+
+/* =====================================================
+   GLOBAL SCREENS
+===================================================== */
 
 .screen,
 .page {
@@ -47,7 +47,7 @@ input {
 
 
 /* =====================================================
-   INTRO
+   INTRO SCREEN
 ===================================================== */
 
 .intro-screen {
@@ -58,6 +58,9 @@ input {
     align-items: center;
 
     z-index: 100;
+
+    opacity: 1;
+    visibility: visible;
 
     transition:
         opacity .8s ease,
@@ -71,26 +74,40 @@ input {
 }
 
 .intro-logo-wrap {
-    animation: logoZoom 1.8s cubic-bezier(.16,1,.3,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: logoZoom 1.8s cubic-bezier(.16, 1, .3, 1);
 }
 
 .main-logo {
-    width: min(600px, 70vw);
     display: block;
 
+    width: min(600px, 70vw);
+    max-width: 80vw;
+    height: auto;
+
     filter:
-        drop-shadow(0 0 20px rgba(156,255,0,.2));
+        drop-shadow(0 0 20px rgba(156, 255, 0, .20));
 }
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
 
 .next-btn {
     position: absolute;
 
-    bottom: 60px;
     left: 50%;
+    bottom: 45px;
 
     transform: translateX(-50%);
 
-    padding: 14px 48px;
+    min-width: 150px;
+
+    padding: 14px 40px;
 
     background: transparent;
 
@@ -98,27 +115,40 @@ input {
 
     border: 1px solid var(--green);
 
+    outline: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
     letter-spacing: 5px;
-    font-weight: bold;
 
     cursor: pointer;
 
-    transition: .3s;
+    z-index: 110;
 
     animation: buttonIn 1s 1.5s both;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
 }
 
 .next-btn:hover {
     background: var(--green);
+
     color: #000;
 
     box-shadow:
-        0 0 20px var(--green),
-        0 0 50px rgba(156,255,0,.3);
+        0 0 20px rgba(156, 255, 0, .7),
+        0 0 50px rgba(156, 255, 0, .25);
 
-    transform:
-        translateX(-50%)
-        scale(1.05);
+    transform: translateX(-50%) scale(1.05);
+}
+
+.next-btn:active {
+    transform: translateX(-50%) scale(.97);
 }
 
 
@@ -138,7 +168,9 @@ input {
     opacity: 0;
     visibility: hidden;
 
-    transition: .6s;
+    transition:
+        opacity .6s ease,
+        visibility .6s ease;
 }
 
 .next-page.show {
@@ -149,6 +181,8 @@ input {
 .next-title {
     text-align: center;
 
+    padding: 20px;
+
     letter-spacing: 7px;
 
     animation: nextText .9s both;
@@ -157,35 +191,37 @@ input {
 .next-title span {
     display: block;
 
-    font-size: clamp(16px,2vw,28px);
+    margin-bottom: 15px;
 
     color: #aaa;
 
-    margin-bottom: 15px;
+    font-size: clamp(15px, 2vw, 28px);
 }
 
 .next-title strong {
     display: block;
 
-    font-size: clamp(50px,9vw,130px);
-
     color: var(--green);
 
+    font-size: clamp(45px, 9vw, 130px);
+
+    line-height: 1;
+
     text-shadow:
-        0 0 15px rgba(156,255,0,.4),
-        0 0 50px rgba(156,255,0,.15);
+        0 0 15px rgba(156, 255, 0, .4),
+        0 0 50px rgba(156, 255, 0, .15);
 }
 
 
 /* =====================================================
-   MAIN PAGE
+   ALL PAGES
 ===================================================== */
 
 .page {
     background:
         radial-gradient(
             circle at center,
-            rgba(100,150,0,.12),
+            rgba(100, 150, 0, .12),
             transparent 50%
         ),
         #030303;
@@ -195,13 +231,20 @@ input {
 
     overflow-y: auto;
 
-    transition: .7s;
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
 }
 
 .page.active {
     opacity: 1;
     visibility: visible;
 }
+
+
+/* =====================================================
+   MAIN MENU
+===================================================== */
 
 .page-content {
     width: min(1150px, 90%);
@@ -212,13 +255,13 @@ input {
 }
 
 .brand-small {
-    font-size: 13px;
-
-    letter-spacing: 5px;
+    margin-bottom: 25px;
 
     color: var(--green);
 
-    margin-bottom: 25px;
+    font-size: 13px;
+
+    letter-spacing: 5px;
 }
 
 .brand-small span {
@@ -226,7 +269,7 @@ input {
 }
 
 .main-heading {
-    font-size: clamp(30px,5vw,65px);
+    font-size: clamp(30px, 5vw, 65px);
 
     line-height: 1;
 
@@ -244,20 +287,20 @@ input {
 
     color: #777;
 
-    letter-spacing: 4px;
-
     font-size: 12px;
+
+    letter-spacing: 4px;
 }
 
 
 /* =====================================================
-   MENU
+   MENU CARDS
 ===================================================== */
 
 .menu-grid {
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 18px;
 
@@ -265,13 +308,17 @@ input {
 }
 
 .menu-card {
+    position: relative;
+
     min-height: 120px;
+
+    padding: 25px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(20,20,20,.9),
-            rgba(5,5,5,.9)
+            rgba(20, 20, 20, .95),
+            rgba(5, 5, 5, .95)
         );
 
     border: 1px solid #202020;
@@ -280,15 +327,14 @@ input {
 
     text-align: left;
 
-    padding: 25px;
-
     cursor: pointer;
-
-    position: relative;
 
     overflow: hidden;
 
-    transition: .35s;
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
 }
 
 .menu-card::before {
@@ -306,7 +352,9 @@ input {
 
     transform: scaleY(0);
 
-    transition: .35s;
+    transform-origin: center;
+
+    transition: transform .35s ease;
 }
 
 .menu-card:hover {
@@ -315,7 +363,7 @@ input {
     transform: translateY(-5px);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.5);
+        0 15px 40px rgba(0, 0, 0, .5);
 }
 
 .menu-card:hover::before {
@@ -325,9 +373,9 @@ input {
 .menu-card small {
     display: block;
 
-    color: var(--green);
-
     margin-bottom: 15px;
+
+    color: var(--green);
 }
 
 .menu-card b {
@@ -354,7 +402,7 @@ input {
 ===================================================== */
 
 .inner-page {
-    padding: 80px 6%;
+    padding: 80px 6% 50px;
 
     overflow-y: auto;
 }
@@ -366,38 +414,38 @@ input {
 }
 
 .section-number {
+    margin-bottom: 15px;
+
     color: var(--green);
 
     font-size: 12px;
 
     letter-spacing: 4px;
-
-    margin-bottom: 15px;
 }
 
 .page-header h1 {
-    font-size: clamp(35px,6vw,75px);
+    font-size: clamp(35px, 6vw, 75px);
 
     letter-spacing: 3px;
 }
 
 .page-header p:last-child {
-    color: #777;
-
     margin-top: 15px;
+
+    color: #777;
 }
 
 .back-btn {
     position: fixed;
 
-    top: 30px;
-    left: 30px;
+    top: 25px;
+    left: 25px;
 
-    z-index: 20;
+    z-index: 200;
 
     padding: 10px 20px;
 
-    background: rgba(0,0,0,.7);
+    background: rgba(0, 0, 0, .8);
 
     border: 1px solid #333;
 
@@ -405,13 +453,18 @@ input {
 
     cursor: pointer;
 
-    transition: .3s;
+    transition:
+        color .3s ease,
+        border-color .3s ease,
+        background .3s ease;
 }
 
 .back-btn:hover {
     color: var(--green);
 
     border-color: var(--green);
+
+    background: #050505;
 }
 
 
@@ -420,68 +473,76 @@ input {
 ===================================================== */
 
 .login-box {
-    width: min(450px,90%);
+    width: min(450px, 90%);
 
     margin: 10vh auto;
 
-    text-align: center;
-
     padding: 50px 35px;
+
+    background: rgba(10, 10, 10, .95);
 
     border: 1px solid #252525;
 
-    background: rgba(10,10,10,.9);
+    text-align: center;
 
     box-shadow:
-        0 20px 70px rgba(0,0,0,.5);
+        0 20px 70px rgba(0, 0, 0, .5);
 }
 
 .lock-icon {
-    font-size: 45px;
-
     margin-bottom: 20px;
+
+    font-size: 45px;
 }
 
 .login-box h1 {
+    margin-bottom: 15px;
+
     font-size: 28px;
 
     letter-spacing: 3px;
-
-    margin-bottom: 15px;
 }
 
 .login-box p {
+    margin-bottom: 25px;
+
     color: #777;
 
     font-size: 13px;
 
     line-height: 1.6;
-
-    margin-bottom: 25px;
 }
 
 .login-box input {
     width: 100%;
 
-    padding: 15px;
-
     margin-bottom: 12px;
+
+    padding: 15px;
 
     background: #050505;
 
     border: 1px solid #292929;
 
+    outline: none;
+
     color: #fff;
 
-    outline: none;
+    transition: border-color .3s ease;
 }
 
 .login-box input:focus {
     border-color: var(--green);
 }
 
+.login-box input::placeholder {
+    color: #555;
+}
+
 .primary-btn {
     width: 100%;
+
+    margin-top: 10px;
 
     padding: 15px;
 
@@ -491,35 +552,37 @@ input {
 
     color: #000;
 
-    font-weight: bold;
+    font-weight: 700;
 
     letter-spacing: 2px;
 
     cursor: pointer;
 
-    margin-top: 10px;
-
-    transition: .3s;
+    transition:
+        box-shadow .3s ease,
+        transform .3s ease;
 }
 
 .primary-btn:hover {
     box-shadow:
-        0 0 25px rgba(156,255,0,.35);
+        0 0 25px rgba(156, 255, 0, .35);
+
+    transform: translateY(-2px);
 }
 
 #loginError {
     display: none;
 
+    margin-top: 15px;
+
     color: var(--red);
 
     font-size: 12px;
-
-    margin-top: 15px;
 }
 
 
 /* =====================================================
-   EARNINGS
+   EARNINGS GRID
 ===================================================== */
 
 .earnings-grid {
@@ -529,42 +592,59 @@ input {
 
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 25px;
 }
 
+
+/* =====================================================
+   REAL 3D FLIP CARDS
+===================================================== */
+
 .earning-card {
-    min-height: 400px;
+    position: relative;
+
+    width: 100%;
+
+    height: 400px;
 
     perspective: 1200px;
+
+    cursor: default;
 }
 
 .card-front,
 .card-back {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
-    min-height: 400px;
-
-    position: relative;
 
     padding: 35px;
-
-    border: 1px solid #222;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(156,255,0,.08),
+            rgba(156, 255, 0, .08),
             transparent 60%
         ),
         #070707;
 
-    backface-visibility: hidden;
+    border: 1px solid #222;
 
-    transition: transform .8s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .8s cubic-bezier(.4, .2, .2, 1);
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
@@ -574,19 +654,33 @@ input {
     align-items: center;
 
     text-align: center;
+
+    transform: rotateY(0deg);
 }
 
 .card-back {
-    display: none;
+    align-items: center;
+
+    text-align: center;
+
+    transform: rotateY(180deg);
 }
 
+
+/* FLIP */
+
 .earning-card.flipped .card-front {
-    display: none;
+    transform: rotateY(-180deg);
 }
 
 .earning-card.flipped .card-back {
-    display: flex;
+    transform: rotateY(0deg);
 }
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
 
 .card-number {
     position: absolute;
@@ -601,14 +695,16 @@ input {
 
 .big-letter,
 .org-symbol {
+    color: var(--green);
+
     font-size: 110px;
 
     font-weight: 900;
 
-    color: var(--green);
+    line-height: 1;
 
     text-shadow:
-        0 0 25px rgba(156,255,0,.25);
+        0 0 25px rgba(156, 255, 0, .25);
 }
 
 .org-symbol {
@@ -617,9 +713,11 @@ input {
 
 .card-front h2,
 .card-back h2 {
+    margin: 15px 0 25px;
+
     letter-spacing: 2px;
 
-    margin: 10px 0 25px;
+    font-size: 20px;
 }
 
 .card-front button,
@@ -628,13 +726,16 @@ input {
 
     background: transparent;
 
-    color: var(--green);
-
     border: 1px solid var(--green);
+
+    color: var(--green);
 
     cursor: pointer;
 
-    transition: .3s;
+    transition:
+        background .3s ease,
+        color .3s ease,
+        box-shadow .3s ease;
 }
 
 .card-front button:hover,
@@ -642,12 +743,22 @@ input {
     background: var(--green);
 
     color: #000;
+
+    box-shadow:
+        0 0 20px rgba(156, 255, 0, .35);
 }
 
+
+/* =====================================================
+   CARD STATS
+===================================================== */
+
 .stats {
+    width: 100%;
+
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 12px;
 
@@ -655,28 +766,33 @@ input {
 }
 
 .stats div {
-    padding: 15px;
-
-    border: 1px solid #202020;
+    padding: 13px;
 
     background: #050505;
+
+    border: 1px solid #202020;
 }
 
 .stats small {
     display: block;
+
+    margin-bottom: 8px;
 
     color: #666;
 
     font-size: 9px;
 
     letter-spacing: 1px;
-
-    margin-bottom: 8px;
 }
 
 .stats strong {
-    font-size: 17px;
+    font-size: 16px;
 }
+
+
+/* =====================================================
+   STATUS COLORS
+===================================================== */
 
 .green {
     color: var(--green) !important;
@@ -692,7 +808,7 @@ input {
 
 
 /* =====================================================
-   GRAPH
+   P&L GRAPH
 ===================================================== */
 
 .graph-box {
@@ -702,14 +818,14 @@ input {
 
     margin: auto;
 
-    border: 1px solid #222;
-
     background:
         linear-gradient(
             135deg,
-            rgba(156,255,0,.05),
+            rgba(156, 255, 0, .05),
             transparent
         );
+
+    border: 1px solid #222;
 
     display: flex;
 
@@ -725,17 +841,17 @@ input {
 }
 
 .graph-icon {
-    font-size: 65px;
-
     margin-bottom: 20px;
+
+    font-size: 65px;
 }
 
 .graph-placeholder h2 {
+    margin-bottom: 10px;
+
     color: #fff;
 
     letter-spacing: 3px;
-
-    margin-bottom: 10px;
 }
 
 .graph-line {
@@ -758,7 +874,7 @@ input {
 
     display: grid;
 
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
 }
@@ -770,7 +886,9 @@ input {
 
     border: 1px solid #222;
 
-    transition: .3s;
+    transition:
+        border-color .3s ease,
+        transform .3s ease;
 }
 
 .person-card:hover {
@@ -809,7 +927,7 @@ input {
 
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 20px;
 }
@@ -817,15 +935,19 @@ input {
 .lineup-card {
     padding: 35px;
 
-    border: 1px solid #222;
-
     background: #080808;
 
-    transition: .3s;
+    border: 1px solid #222;
+
+    transition:
+        border-color .3s ease,
+        transform .3s ease;
 }
 
 .lineup-card:hover {
     border-color: var(--green);
+
+    transform: translateY(-4px);
 }
 
 .lineup-card span {
@@ -858,7 +980,7 @@ input {
 
     display: grid;
 
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
 }
@@ -887,7 +1009,7 @@ input {
 
 
 /* =====================================================
-   TIMELINE
+   TOURNAMENT HISTORY
 ===================================================== */
 
 .timeline {
@@ -895,9 +1017,9 @@ input {
 
     margin: auto;
 
-    border-left: 1px solid var(--green);
-
     padding-left: 40px;
+
+    border-left: 1px solid var(--green);
 }
 
 .timeline-item {
@@ -911,8 +1033,8 @@ input {
 
     position: absolute;
 
-    left: -47px;
     top: 5px;
+    left: -47px;
 
     width: 13px;
     height: 13px;
@@ -955,11 +1077,11 @@ input {
 
     border: 1px solid #222;
 
-    line-height: 2;
-
     color: #aaa;
 
     font-size: 16px;
+
+    line-height: 2;
 }
 
 .about-box strong {
@@ -971,14 +1093,14 @@ input {
 
     color: var(--green);
 
-    letter-spacing: 4px;
-
     font-weight: bold;
+
+    letter-spacing: 4px;
 }
 
 
 /* =====================================================
-   JOIN
+   JOIN US
 ===================================================== */
 
 .join-content {
@@ -990,9 +1112,9 @@ input {
 }
 
 .join-content h1 {
-    font-size: clamp(40px,7vw,80px);
-
     margin-bottom: 20px;
+
+    font-size: clamp(40px, 7vw, 80px);
 }
 
 .join-content > p {
@@ -1020,13 +1142,19 @@ input {
 
     text-decoration: none;
 
-    transition: .3s;
+    transition:
+        background .3s ease,
+        color .3s ease,
+        box-shadow .3s ease;
 }
 
 .social-btn:hover {
     background: var(--green);
 
     color: #000;
+
+    box-shadow:
+        0 0 25px rgba(156, 255, 0, .3);
 }
 
 
@@ -1038,46 +1166,63 @@ input {
 
     0% {
         opacity: 0;
+
         transform: scale(1.5);
+
         filter: brightness(0);
     }
 
     60% {
         opacity: 1;
+
         filter: brightness(1.5);
     }
 
     100% {
         opacity: 1;
+
         transform: scale(1);
+
         filter: brightness(1);
     }
 }
+
 
 @keyframes buttonIn {
 
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(20px);
+
+        transform:
+            translateX(-50%)
+            translateY(20px);
     }
 
     to {
         opacity: 1;
-        transform: translateX(-50%);
+
+        transform:
+            translateX(-50%)
+            translateY(0);
     }
 }
+
 
 @keyframes nextText {
 
     from {
         opacity: 0;
+
         transform: scale(.8);
+
         letter-spacing: 20px;
     }
 
     to {
         opacity: 1;
+
         transform: scale(1);
+
         letter-spacing: 7px;
     }
 }
@@ -1090,13 +1235,74 @@ input {
 @media (max-width: 750px) {
 
     .page-content {
+        width: 90%;
+
         padding: 50px 0;
     }
 
-    .menu-grid,
-    .earnings-grid,
-    .lineup-grid {
+    .next-btn {
+        bottom: 30px;
+
+        min-width: 140px;
+
+        padding: 12px 30px;
+
+        font-size: 12px;
+
+        letter-spacing: 4px;
+    }
+
+    .menu-grid {
         grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-top: 35px;
+    }
+
+    .menu-card {
+        min-height: 100px;
+    }
+
+    .earnings-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .earning-card {
+        height: 430px;
+    }
+
+    .card-front,
+    .card-back {
+        height: 430px;
+
+        min-height: 430px;
+
+        padding: 25px;
+    }
+
+    .big-letter {
+        font-size: 90px;
+    }
+
+    .org-symbol {
+        font-size: 65px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px;
+    }
+
+    .stats div {
+        padding: 10px;
+    }
+
+    .stats strong {
+        font-size: 14px;
     }
 
     .management-grid,
@@ -1104,20 +1310,18 @@ input {
         grid-template-columns: 1fr;
     }
 
-    .menu-card {
-        min-height: 100px;
+    .lineup-grid {
+        grid-template-columns: 1fr;
     }
 
-    .inner-page {
-        padding: 80px 20px 40px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr 1fr;
+    .graph-box {
+        height: 400px;
     }
 
     .about-box {
         padding: 30px 20px;
+
+        font-size: 14px;
     }
 
     .social-buttons {
@@ -1126,7 +1330,49 @@ input {
 
     .back-btn {
         top: 15px;
+
         left: 15px;
+
+        padding: 9px 15px;
     }
 
+    .inner-page {
+        padding: 75px 20px 40px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .main-logo {
+        width: 75vw;
+    }
+
+    .next-btn {
+        bottom: 25px;
+
+        padding: 11px 25px;
+    }
+
+    .card-front,
+    .card-back {
+        padding: 20px;
+    }
+
+    .card-front h2,
+    .card-back h2 {
+        font-size: 16px;
+    }
+
+    .stats small {
+        font-size: 8px;
+    }
+
+    .stats strong {
+        font-size: 13px;
+    }
 }
