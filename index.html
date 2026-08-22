@@ -544,28 +544,80 @@
     </div>
 
 
+    <!-- TOTAL P&L -->
+
+    <div class="pnl-summary">
+
+        <div class="pnl-total">
+            <small>TOTAL P&amp;L</small>
+            <strong id="totalPnl">₹0</strong>
+            <span id="pnlStatus">CALCULATING...</span>
+        </div>
+
+    </div>
+
+
+    <!-- GRAPH -->
+
     <div class="graph-box">
 
-        <div class="graph-placeholder">
+        <div class="graph-header">
 
-            <div class="graph-icon">📊</div>
-
-            <h2>3D P&amp;L GRAPH</h2>
-
-            <p>
-                Monthly data from May 2026 will be displayed here.
-            </p>
-
-            <div class="graph-line">
-                MAY → JUN → JUL → AUG → SEP → OCT
+            <div>
+                <small>RAMPAGE FINANCIAL PERFORMANCE</small>
+                <h2>P&amp;L VS MONTH</h2>
             </div>
+
+            <div class="graph-legend">
+                <span class="profit-dot"></span>
+                PROFIT
+                <span class="loss-dot"></span>
+                LOSS
+            </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+            <canvas id="pnlChart"></canvas>
 
         </div>
 
     </div>
 
-</section>
 
+    <!-- MONTHLY DETAILS -->
+
+    <div class="monthly-pnl">
+
+        <div class="monthly-card">
+            <small>MAY 2026</small>
+            <strong>₹743</strong>
+            <span class="profit-text">PROFIT</span>
+        </div>
+
+        <div class="monthly-card">
+            <small>JUNE 2026</small>
+            <strong>₹315</strong>
+            <span class="profit-text">PROFIT</span>
+        </div>
+
+        <div class="monthly-card">
+            <small>JULY 2026</small>
+            <strong>₹427</strong>
+            <span class="profit-text">PROFIT</span>
+        </div>
+
+        <div class="monthly-card">
+            <small>AUGUST 2026</small>
+            <strong>₹0</strong>
+            <span class="neutral-text">NO DATA</span>
+        </div>
+
+    </div>
+
+</section>
 
 <!-- =====================================================
      MANAGEMENT
@@ -848,6 +900,7 @@
 </section>
 
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 
 </body>
