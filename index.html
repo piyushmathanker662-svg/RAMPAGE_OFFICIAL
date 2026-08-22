@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>RAMPAGE OFFICIAL</title>
 
     <link rel="stylesheet" href="style.css">
@@ -10,59 +11,844 @@
 
 <body>
 
-    <!-- INTRO -->
-    <section id="intro" class="intro">
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-        <img src="logo.png" alt="Rampage Esports Logo" class="logo">
+<section id="intro" class="screen intro-screen">
 
-        <button id="nextBtn" class="next-btn">
-            NEXT
+    <div class="intro-logo-wrap">
+        <img src="logo.png" class="main-logo" alt="Rampage Esports">
+    </div>
+
+    <button id="nextBtn" class="next-btn">
+        NEXT
+    </button>
+
+</section>
+
+
+<!-- =====================================================
+     NEXT PAGE
+===================================================== -->
+
+<section id="nextPage" class="screen next-page">
+
+    <div class="next-title">
+        <span>THE NEXT PAGE IS</span>
+        <strong>RAMPAGE</strong>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN MENU
+===================================================== -->
+
+<section id="mainMenu" class="page">
+
+    <div class="page-content">
+
+        <div class="brand-small">
+            RAMPAGE <span>OFFICIAL</span>
+        </div>
+
+        <h1 class="main-heading">
+            THE NEXT PAGE IS <span>RAMPAGE</span>
+        </h1>
+
+        <p class="menu-subtitle">
+            OFFICIAL ESPORTS PORTAL
+        </p>
+
+
+        <div class="menu-grid">
+
+            <button class="menu-card" onclick="openPage('earningsLogin')">
+                <small>01</small>
+                <b>💰 EARNINGS</b>
+                <span>Financial Overview</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('pnlPage')">
+                <small>02</small>
+                <b>📊 RG P&amp;L</b>
+                <span>Profit &amp; Loss Graph</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('managementPage')">
+                <small>03</small>
+                <b>👥 MANAGEMENT</b>
+                <span>Rampage Management</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('lineupsPage')">
+                <small>04</small>
+                <b>🎮 LINEUPS</b>
+                <span>Our Active Teams</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('achievementsPage')">
+                <small>05</small>
+                <b>🏆 ACHIEVEMENTS</b>
+                <span>Rampage Milestones</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('historyPage')">
+                <small>06</small>
+                <b>🏆 TOURNAMENT HISTORY</b>
+                <span>Our Journey</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('aboutPage')">
+                <small>07</small>
+                <b>ℹ️ ABOUT US</b>
+                <span>Know Rampage</span>
+            </button>
+
+
+            <button class="menu-card" onclick="openPage('joinPage')">
+                <small>08</small>
+                <b>🚀 JOIN US</b>
+                <span>Become A Part Of Rampage</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EARNINGS LOGIN
+===================================================== -->
+
+<section id="earningsLogin" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← BACK</button>
+
+    <div class="login-box">
+
+        <div class="lock-icon">🔒</div>
+
+        <p class="section-number">01 / EARNINGS</p>
+
+        <h1>AUTHORIZED ACCESS</h1>
+
+        <p>
+            Enter the Rampage earnings access credentials.
+        </p>
+
+
+        <input
+            id="loginId"
+            type="text"
+            placeholder="ENTER ID"
+            autocomplete="off"
+        >
+
+
+        <input
+            id="loginPassword"
+            type="password"
+            placeholder="ENTER PASSWORD"
+        >
+
+
+        <button class="primary-btn" onclick="loginEarnings()">
+            UNLOCK EARNINGS
         </button>
 
-    </section>
+
+        <div id="loginError">
+            INVALID ID OR PASSWORD
+        </div>
+
+    </div>
+
+</section>
 
 
-    <!-- THE NEXT PAGE -->
-    <section id="nextPage" class="next-page">
+<!-- =====================================================
+     EARNINGS PAGE
+===================================================== -->
 
-        <h1>THE NEXT PAGE IS RAMPAGE</h1>
+<section id="earningsPage" class="page inner-page">
 
-    </section>
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">01 / EARNINGS</p>
+
+        <h1>RAMPAGE <span>EARNINGS</span></h1>
+
+        <p>
+            Team and organisation financial overview.
+        </p>
+
+    </div>
 
 
-    <!-- MAIN MENU -->
-    <section id="mainMenu" class="main-menu">
+    <div class="earnings-grid">
 
-        <div class="menu-container">
 
-            <h2>RAMPAGE OFFICIAL</h2>
+        <!-- X -->
 
-            <div class="menu-grid">
+        <div class="earning-card">
 
-                <button>EARNINGS</button>
+            <div class="card-front">
 
-                <button>RG P&amp;L</button>
+                <div class="card-number">01</div>
 
-                <button>MANAGEMENT</button>
+                <div class="big-letter">X</div>
 
-                <button>LINEUPS</button>
+                <h2>RAMPAGE ESPORTS X</h2>
 
-                <button>ACHIEVEMENTS</button>
+                <button onclick="flipCard(this)">
+                    VIEW DETAILS ↻
+                </button>
 
-                <button>TOURNAMENT HISTORY</button>
+            </div>
 
-                <button>ABOUT US</button>
 
-                <button>JOIN US</button>
+            <div class="card-back">
+
+                <h2>RAMPAGE ESPORTS X</h2>
+
+                <div class="stats">
+
+                    <div>
+                        <small>INVESTMENT</small>
+                        <strong>₹2,495</strong>
+                    </div>
+
+                    <div>
+                        <small>TOTAL EARNING</small>
+                        <strong>₹3,930</strong>
+                    </div>
+
+                    <div>
+                        <small>SHARE OF TEAMS</small>
+                        <strong>₹1,302</strong>
+                    </div>
+
+                    <div>
+                        <small>PAID AMOUNT</small>
+                        <strong>₹1,000</strong>
+                    </div>
+
+                    <div>
+                        <small>BALANCE</small>
+                        <strong>₹302</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="green">ACTIVE</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="flipCard(this)">
+                    ← BACK
+                </button>
 
             </div>
 
         </div>
 
-    </section>
+
+        <!-- Y -->
+
+        <div class="earning-card">
+
+            <div class="card-front">
+
+                <div class="card-number">02</div>
+
+                <div class="big-letter">Y</div>
+
+                <h2>RAMPAGE ESPORTS Y</h2>
+
+                <button onclick="flipCard(this)">
+                    VIEW DETAILS ↻
+                </button>
+
+            </div>
 
 
-    <script src="script.js"></script>
+            <div class="card-back">
+
+                <h2>RAMPAGE ESPORTS Y</h2>
+
+                <div class="stats">
+
+                    <div>
+                        <small>INVESTMENT</small>
+                        <strong>₹440</strong>
+                    </div>
+
+                    <div>
+                        <small>TOTAL EARNING</small>
+                        <strong>₹685</strong>
+                    </div>
+
+                    <div>
+                        <small>SHARE OF TEAMS</small>
+                        <strong>₹183</strong>
+                    </div>
+
+                    <div>
+                        <small>PAID AMOUNT</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>BALANCE</small>
+                        <strong>₹183</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="green">ACTIVE</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="flipCard(this)">
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Z -->
+
+        <div class="earning-card">
+
+            <div class="card-front">
+
+                <div class="card-number">03</div>
+
+                <div class="big-letter">Z</div>
+
+                <h2>RAMPAGE ESPORTS Z</h2>
+
+                <button onclick="flipCard(this)">
+                    VIEW DETAILS ↻
+                </button>
+
+            </div>
+
+
+            <div class="card-back">
+
+                <h2>RAMPAGE ESPORTS Z</h2>
+
+                <div class="stats">
+
+                    <div>
+                        <small>INVESTMENT</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>TOTAL EARNING</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>SHARE OF TEAMS</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>PAID AMOUNT</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>BALANCE</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="orange">INACTIVE</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="flipCard(this)">
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- BRUTAL -->
+
+        <div class="earning-card">
+
+            <div class="card-front">
+
+                <div class="card-number">04</div>
+
+                <div class="big-letter">B</div>
+
+                <h2>RAMPAGE BRUTAL</h2>
+
+                <button onclick="flipCard(this)">
+                    VIEW DETAILS ↻
+                </button>
+
+            </div>
+
+
+            <div class="card-back">
+
+                <h2>RAMPAGE BRUTAL</h2>
+
+                <div class="stats">
+
+                    <div>
+                        <small>INVESTMENT</small>
+                        <strong>₹55</strong>
+                    </div>
+
+                    <div>
+                        <small>TOTAL EARNING</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>SHARE OF TEAMS</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>PAID AMOUNT</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>BALANCE</small>
+                        <strong>₹55</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="red">CLOSED</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="flipCard(this)">
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORGANISATION -->
+
+        <div class="earning-card organisation-card">
+
+            <div class="card-front">
+
+                <div class="card-number">05</div>
+
+                <div class="org-symbol">RG</div>
+
+                <h2>ORGANISATIONS</h2>
+
+                <button onclick="flipCard(this)">
+                    VIEW DETAILS ↻
+                </button>
+
+            </div>
+
+
+            <div class="card-back">
+
+                <h2>RAMPAGE ORGANISATIONS</h2>
+
+                <div class="stats">
+
+                    <div>
+                        <small>INVESTMENT</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>TOTAL EARNING</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>PROFIT / LOSS</small>
+                        <strong>₹0</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="green">ACTIVE</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="flipCard(this)">
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     P&L PAGE
+===================================================== -->
+
+<section id="pnlPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">02 / FINANCE</p>
+
+        <h1>RG <span>P&amp;L GRAPH</span></h1>
+
+        <p>Monthly Rampage financial performance.</p>
+
+    </div>
+
+
+    <div class="graph-box">
+
+        <div class="graph-placeholder">
+
+            <div class="graph-icon">📊</div>
+
+            <h2>3D P&amp;L GRAPH</h2>
+
+            <p>
+                Monthly data from May 2026 will be displayed here.
+            </p>
+
+            <div class="graph-line">
+                MAY → JUN → JUL → AUG → SEP → OCT
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MANAGEMENT
+===================================================== -->
+
+<section id="managementPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">03 / MANAGEMENT</p>
+
+        <h1>RAMPAGE <span>MANAGEMENT</span></h1>
+
+    </div>
+
+
+    <div class="management-grid">
+
+        <div class="person-card">
+
+            <span>FOUNDER</span>
+
+            <h2>PIYUSH MATHANKAR</h2>
+
+            <p>Founder &amp; Owner</p>
+
+        </div>
+
+
+        <div class="person-card">
+
+            <span>MANAGER</span>
+
+            <h2>MANAGER</h2>
+
+            <p>Management Department</p>
+
+        </div>
+
+
+        <div class="person-card">
+
+            <span>EDITOR</span>
+
+            <h2>EDITOR</h2>
+
+            <p>Media &amp; Content Department</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LINEUPS
+===================================================== -->
+
+<section id="lineupsPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">04 / LINEUPS</p>
+
+        <h1>RAMPAGE <span>LINEUPS</span></h1>
+
+    </div>
+
+
+    <div class="lineup-grid">
+
+        <div class="lineup-card">
+            <span>FREE FIRE MAX</span>
+            <h2>RAMPAGE ESPORTS X</h2>
+            <b class="green">ACTIVE</b>
+        </div>
+
+        <div class="lineup-card">
+            <span>FREE FIRE MAX</span>
+            <h2>RAMPAGE ESPORTS Y</h2>
+            <b class="green">ACTIVE</b>
+        </div>
+
+        <div class="lineup-card">
+            <span>FREE FIRE MAX</span>
+            <h2>RAMPAGE ESPORTS Z</h2>
+            <b class="orange">INACTIVE</b>
+        </div>
+
+        <div class="lineup-card">
+            <span>FREE FIRE MAX</span>
+            <h2>RAMPAGE BRUTAL</h2>
+            <b class="red">CLOSED</b>
+        </div>
+
+        <div class="lineup-card coming-soon">
+            <span>BGMI</span>
+            <h2>COMING SOON</h2>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACHIEVEMENTS
+===================================================== -->
+
+<section id="achievementsPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">05 / ACHIEVEMENTS</p>
+
+        <h1>RAMPAGE <span>ACHIEVEMENTS</span></h1>
+
+    </div>
+
+
+    <div class="achievement-grid">
+
+        <div class="achievement-card">
+            <strong>01</strong>
+            <h2>FIRST MILESTONE</h2>
+            <p>Rampage journey begins.</p>
+        </div>
+
+        <div class="achievement-card">
+            <strong>02</strong>
+            <h2>FIRST LINEUP</h2>
+            <p>Official competitive lineup established.</p>
+        </div>
+
+        <div class="achievement-card">
+            <strong>03</strong>
+            <h2>MORE TO COME</h2>
+            <p>The next achievement is waiting.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TOURNAMENT HISTORY
+===================================================== -->
+
+<section id="historyPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">06 / HISTORY</p>
+
+        <h1>TOURNAMENT <span>HISTORY</span></h1>
+
+    </div>
+
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <span>2026</span>
+            <h2>RAMPAGE ERA BEGINS</h2>
+            <p>Rampage Esports starts its competitive journey.</p>
+        </div>
+
+        <div class="timeline-item">
+            <span>2026</span>
+            <h2>FREE FIRE MAX LINEUPS</h2>
+            <p>Competitive teams join the Rampage ecosystem.</p>
+        </div>
+
+        <div class="timeline-item">
+            <span>FUTURE</span>
+            <h2>NEXT PAGE</h2>
+            <p>More tournaments and achievements coming soon.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT US
+===================================================== -->
+
+<section id="aboutPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="page-header">
+
+        <p class="section-number">07 / ABOUT</p>
+
+        <h1>ABOUT <span>RAMPAGE</span></h1>
+
+    </div>
+
+
+    <div class="about-box">
+
+        <p>
+            <strong>Rampage Esports</strong> is an esports organisation
+            focused on building competitive gaming teams, developing
+            talented players and creating a professional ecosystem for
+            esports enthusiasts. Rampage aims to provide its players with
+            a structured environment where dedication, discipline,
+            teamwork and performance are valued. From competitive
+            lineups to tournaments, content and community activities,
+            Rampage continues to build its identity one milestone at a
+            time. The vision is simple — create opportunities, support
+            talent and build a strong esports legacy. This is not just
+            another team. This is the next page.
+        </p>
+
+        <div class="about-tag">
+            #THE NEXT PAGE IS RAMPAGE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     JOIN US
+===================================================== -->
+
+<section id="joinPage" class="page inner-page">
+
+    <button class="back-btn" onclick="goHome()">← MENU</button>
+
+    <div class="join-content">
+
+        <p class="section-number">08 / JOIN US</p>
+
+        <h1>JOIN THE <span>RAMPAGE</span></h1>
+
+        <p>
+            Follow Rampage Esports and stay connected with our
+            latest announcements, lineups and esports updates.
+        </p>
+
+
+        <div class="social-buttons">
+
+            <a
+                href="#"
+                target="_blank"
+                class="social-btn"
+            >
+                📸 INSTAGRAM
+            </a>
+
+
+            <a
+                href="#"
+                target="_blank"
+                class="social-btn"
+            >
+                💬 WHATSAPP
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
