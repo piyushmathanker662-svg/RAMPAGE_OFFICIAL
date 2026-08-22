@@ -245,6 +245,24 @@ function flipCard(button) {
 
 }
 
+/* =====================================================
+   FLIP LINEUP CARDS
+===================================================== */
+
+function flipLineupCard(button) {
+
+    const card =
+        button.closest(".flip-lineup-card");
+
+
+    if (!card) {
+        return;
+    }
+
+
+    card.classList.toggle("flipped");
+
+}
 
 /* =====================================================
    EARNINGS DATA
