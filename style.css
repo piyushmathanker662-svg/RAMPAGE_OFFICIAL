@@ -2065,6 +2065,584 @@ a {
     opacity: 0.7;
 }
 
+/* =====================================================
+   LINEUP FLIP CARDS
+===================================================== */
+
+.lineup-grid {
+    max-width: 1200px;
+    margin: 40px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.lineup-card {
+    position: relative;
+
+    min-height: 430px;
+
+    perspective: 1200px;
+}
+
+
+/* =====================================================
+   FRONT + BACK
+===================================================== */
+
+.lineup-card-front,
+.lineup-card-back {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101010,
+            #070707
+        );
+
+    border: 1px solid #1d1d1d;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+
+    transition:
+        transform 0.7s cubic-bezier(
+            0.4,
+            0.2,
+            0.2,
+            1
+        );
+
+}
+
+
+/* =====================================================
+   FRONT
+===================================================== */
+
+.lineup-card-front {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.lineup-card-front::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #39ff14;
+
+    box-shadow:
+        0 0 20px
+        rgba(57,255,20,0.5);
+
+}
+
+
+.lineup-card-front::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border: 1px solid
+        rgba(57,255,20,0.08);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   CARD NUMBER
+===================================================== */
+
+.lineup-number {
+
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    font-size: 12px;
+
+    color: #555;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.lineup-game {
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #777;
+
+    margin-bottom: 15px;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   BIG SYMBOL
+===================================================== */
+
+.lineup-symbol {
+
+    width: 105px;
+    height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border: 2px solid #39ff14;
+
+    color: #39ff14;
+
+    font-size: 50px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 20px
+        rgba(57,255,20,0.4);
+
+    box-shadow:
+        0 0 25px
+        rgba(57,255,20,0.08);
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.lineup-card h2 {
+
+    font-size: 24px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.lineup-status {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    z-index: 2;
+}
+
+
+.active-status {
+    color: #39ff14;
+}
+
+
+.coming-status {
+    color: #777;
+}
+
+
+/* =====================================================
+   VIEW BUTTON
+===================================================== */
+
+.lineup-view-btn {
+
+    margin-top: 25px;
+
+    padding: 12px 25px;
+
+    border: 1px solid #39ff14;
+
+    background: transparent;
+
+    color: #39ff14;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    z-index: 5;
+}
+
+
+.lineup-view-btn:hover {
+
+    background: #39ff14;
+
+    color: #000;
+
+    box-shadow:
+        0 0 25px
+        rgba(57,255,20,0.3);
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   FLIP BACK
+===================================================== */
+
+.lineup-card-back {
+
+    transform:
+        rotateY(180deg);
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   WHEN FLIPPED
+===================================================== */
+
+.flip-lineup-card.flipped
+.lineup-card-front {
+
+    transform:
+        rotateY(-180deg);
+}
+
+
+.flip-lineup-card.flipped
+.lineup-card-back {
+
+    transform:
+        rotateY(0deg);
+}
+
+
+/* =====================================================
+   BACK HEADER
+===================================================== */
+
+.lineup-back-header {
+
+    border-bottom:
+        1px solid #202020;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 15px;
+}
+
+
+.lineup-back-header span {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #777;
+}
+
+
+.lineup-back-header h2 {
+
+    color: #39ff14;
+
+    font-size: 21px;
+
+    margin-top: 7px;
+}
+
+
+/* =====================================================
+   PLAYERS
+===================================================== */
+
+.players-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
+}
+
+
+.players-list::-webkit-scrollbar {
+
+    width: 4px;
+}
+
+
+.players-list::-webkit-scrollbar-thumb {
+
+    background: #39ff14;
+
+    border-radius: 5px;
+}
+
+
+/* =====================================================
+   PLAYER ROW
+===================================================== */
+
+.player-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 13px 15px;
+
+    background: #0d0d0d;
+
+    border: 1px solid #1b1b1b;
+
+    transition: 0.3s;
+}
+
+
+.player-row:hover {
+
+    border-color: #39ff14;
+
+    transform: translateX(4px);
+}
+
+
+.player-row span {
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.5px;
+}
+
+
+.player-row b {
+
+    color: #39ff14;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    text-align: right;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.lineup-view-btn.back {
+
+    align-self: flex-start;
+
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   COMING SOON CARD
+===================================================== */
+
+.coming-lineup {
+
+    transition: 0.4s;
+
+    cursor: default;
+}
+
+
+.coming-lineup:hover {
+
+    transform: translateY(-6px);
+
+}
+
+
+.coming-lineup
+.lineup-card-front {
+
+    opacity: 0.75;
+}
+
+
+.coming-lineup
+.lineup-symbol {
+
+    border-color: #444;
+
+    color: #555;
+
+    text-shadow: none;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .lineup-grid {
+
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+    .lineup-card {
+
+        min-height: 450px;
+
+    }
+
+
+    .lineup-card-front,
+    .lineup-card-back {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .lineup-card h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .lineup-symbol {
+
+        width: 90px;
+        height: 90px;
+
+        font-size: 42px;
+
+    }
+
+
+    .player-row {
+
+        padding: 12px 10px;
+
+    }
+
+
+    .player-row span {
+
+        font-size: 11px;
+
+    }
+
+
+    .player-row b {
+
+        font-size: 8px;
+
+    }
+
+}
 
 /* =====================================================
    ACHIEVEMENTS
