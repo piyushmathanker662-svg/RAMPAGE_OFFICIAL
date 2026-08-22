@@ -7,254 +7,291 @@
 html,
 body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background: #000;
     color: #fff;
 }
 
+body {
+    overflow-x: hidden;
+}
 
-/* =========================================
-   INTRO SCREEN
-========================================= */
+button,
+input {
+    font-family: inherit;
+}
 
-.intro {
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+:root {
+    --green: #9cff00;
+    --dark-green: #5f9900;
+    --black: #000;
+    --white: #fff;
+    --grey: #999;
+    --red: #ff3333;
+    --orange: #ffb000;
+}
+
+.screen,
+.page {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100vh;
+}
 
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro-screen {
     background: #000;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     z-index: 100;
-
-    animation: introBackground 1s ease forwards;
-}
-
-
-.logo {
-    width: min(55vw, 650px);
-    max-width: 80%;
-    height: auto;
-
-    opacity: 0;
-
-    animation:
-        logoEnter 1.8s cubic-bezier(.16, 1, .3, 1) .3s forwards,
-        logoGlow 2s ease-in-out 2s infinite alternate;
-}
-
-
-/* =========================================
-   NEXT BUTTON
-========================================= */
-
-.next-btn {
-    position: absolute;
-
-    bottom: 70px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    padding: 14px 45px;
-
-    background: transparent;
-
-    color: #9cff00;
-
-    border: 1px solid #9cff00;
-
-    font-size: 15px;
-    font-weight: 700;
-
-    letter-spacing: 4px;
-
-    cursor: pointer;
-
-    opacity: 0;
-
-    animation: buttonEnter 1s ease 1.8s forwards;
-
-    transition: .3s ease;
-
-    box-shadow:
-        0 0 10px rgba(156, 255, 0, .15);
-}
-
-
-.next-btn:hover {
-    background: #9cff00;
-    color: #000;
-
-    box-shadow:
-        0 0 20px rgba(156, 255, 0, .6),
-        0 0 50px rgba(156, 255, 0, .25);
-
-    transform: translateX(-50%) scale(1.05);
-}
-
-
-/* =========================================
-   THE NEXT PAGE
-========================================= */
-
-.next-page {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100vh;
-
-    background: #000;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 90;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: opacity .6s ease;
-}
-
-
-.next-page.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.next-page h1 {
-    text-align: center;
-
-    font-size: clamp(30px, 6vw, 90px);
-
-    letter-spacing: 8px;
-
-    color: #fff;
-
-    text-shadow:
-        0 0 10px rgba(156, 255, 0, .5),
-        0 0 30px rgba(156, 255, 0, .25);
-
-    animation: nextTextEnter .8s ease forwards;
-}
-
-
-/* =========================================
-   MAIN MENU
-========================================= */
-
-.main-menu {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(80, 130, 0, .12),
-            transparent 45%
-        ),
-        #050505;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 50;
-
-    opacity: 0;
-    visibility: hidden;
 
     transition:
         opacity .8s ease,
         visibility .8s ease;
 }
 
+.intro-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
 
-.main-menu.show {
+.intro-logo-wrap {
+    animation: logoZoom 1.8s cubic-bezier(.16,1,.3,1);
+}
+
+.main-logo {
+    width: min(600px, 70vw);
+    display: block;
+
+    filter:
+        drop-shadow(0 0 20px rgba(156,255,0,.2));
+}
+
+.next-btn {
+    position: absolute;
+
+    bottom: 60px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 14px 48px;
+
+    background: transparent;
+
+    color: var(--green);
+
+    border: 1px solid var(--green);
+
+    letter-spacing: 5px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    animation: buttonIn 1s 1.5s both;
+}
+
+.next-btn:hover {
+    background: var(--green);
+    color: #000;
+
+    box-shadow:
+        0 0 20px var(--green),
+        0 0 50px rgba(156,255,0,.3);
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+}
+
+
+/* =====================================================
+   NEXT PAGE
+===================================================== */
+
+.next-page {
+    background: #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 90;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .6s;
+}
+
+.next-page.show {
     opacity: 1;
     visibility: visible;
 }
 
-
-.menu-container {
-    width: min(1100px, 90%);
-
+.next-title {
     text-align: center;
+
+    letter-spacing: 7px;
+
+    animation: nextText .9s both;
 }
 
+.next-title span {
+    display: block;
 
-.menu-container h2 {
-    margin-bottom: 50px;
+    font-size: clamp(16px,2vw,28px);
 
-    font-size: clamp(28px, 4vw, 55px);
+    color: #aaa;
 
-    letter-spacing: 8px;
+    margin-bottom: 15px;
+}
 
-    color: #fff;
+.next-title strong {
+    display: block;
+
+    font-size: clamp(50px,9vw,130px);
+
+    color: var(--green);
 
     text-shadow:
-        0 0 15px rgba(156, 255, 0, .4);
+        0 0 15px rgba(156,255,0,.4),
+        0 0 50px rgba(156,255,0,.15);
 }
 
 
-/* =========================================
-   MENU GRID
-========================================= */
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.page {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100,150,0,.12),
+            transparent 50%
+        ),
+        #030303;
+
+    opacity: 0;
+    visibility: hidden;
+
+    overflow-y: auto;
+
+    transition: .7s;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-content {
+    width: min(1150px, 90%);
+
+    margin: auto;
+
+    padding: 70px 0;
+}
+
+.brand-small {
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    color: var(--green);
+
+    margin-bottom: 25px;
+}
+
+.brand-small span {
+    color: #fff;
+}
+
+.main-heading {
+    font-size: clamp(30px,5vw,65px);
+
+    line-height: 1;
+
+    letter-spacing: 3px;
+}
+
+.main-heading span,
+.page-header h1 span,
+.join-content h1 span {
+    color: var(--green);
+}
+
+.menu-subtitle {
+    margin-top: 15px;
+
+    color: #777;
+
+    letter-spacing: 4px;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
 
 .menu-grid {
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
 
     gap: 18px;
 
-    max-width: 850px;
-
-    margin: auto;
+    margin-top: 55px;
 }
 
+.menu-card {
+    min-height: 120px;
 
-.menu-grid button {
-    min-height: 85px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20,20,20,.9),
+            rgba(5,5,5,.9)
+        );
 
-    background: rgba(10, 10, 10, .8);
-
-    border: 1px solid rgba(156, 255, 0, .35);
+    border: 1px solid #202020;
 
     color: #fff;
 
-    font-size: 15px;
+    text-align: left;
 
-    font-weight: 700;
-
-    letter-spacing: 3px;
+    padding: 25px;
 
     cursor: pointer;
-
-    transition: .35s ease;
 
     position: relative;
 
     overflow: hidden;
+
+    transition: .35s;
 }
 
-
-.menu-grid button::before {
+.menu-card::before {
     content: "";
 
     position: absolute;
@@ -265,40 +302,743 @@ body {
     width: 3px;
     height: 100%;
 
-    background: #9cff00;
+    background: var(--green);
 
     transform: scaleY(0);
 
-    transition: .35s ease;
+    transition: .35s;
 }
 
+.menu-card:hover {
+    border-color: var(--green);
 
-.menu-grid button:hover {
-    background: rgba(156, 255, 0, .08);
-
-    border-color: #9cff00;
-
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 
     box-shadow:
-        0 10px 30px rgba(156, 255, 0, .12);
+        0 15px 40px rgba(0,0,0,.5);
 }
 
-
-.menu-grid button:hover::before {
+.menu-card:hover::before {
     transform: scaleY(1);
 }
 
+.menu-card small {
+    display: block;
 
-/* =========================================
+    color: var(--green);
+
+    margin-bottom: 15px;
+}
+
+.menu-card b {
+    display: block;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+}
+
+.menu-card span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   INNER PAGES
+===================================================== */
+
+.inner-page {
+    padding: 80px 6%;
+
+    overflow-y: auto;
+}
+
+.page-header {
+    max-width: 1100px;
+
+    margin: 0 auto 50px;
+}
+
+.section-number {
+    color: var(--green);
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+.page-header h1 {
+    font-size: clamp(35px,6vw,75px);
+
+    letter-spacing: 3px;
+}
+
+.page-header p:last-child {
+    color: #777;
+
+    margin-top: 15px;
+}
+
+.back-btn {
+    position: fixed;
+
+    top: 30px;
+    left: 30px;
+
+    z-index: 20;
+
+    padding: 10px 20px;
+
+    background: rgba(0,0,0,.7);
+
+    border: 1px solid #333;
+
+    color: #aaa;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.back-btn:hover {
+    color: var(--green);
+
+    border-color: var(--green);
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-box {
+    width: min(450px,90%);
+
+    margin: 10vh auto;
+
+    text-align: center;
+
+    padding: 50px 35px;
+
+    border: 1px solid #252525;
+
+    background: rgba(10,10,10,.9);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.5);
+}
+
+.lock-icon {
+    font-size: 45px;
+
+    margin-bottom: 20px;
+}
+
+.login-box h1 {
+    font-size: 28px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+.login-box p {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+
+    background: #050505;
+
+    border: 1px solid #292929;
+
+    color: #fff;
+
+    outline: none;
+}
+
+.login-box input:focus {
+    border-color: var(--green);
+}
+
+.primary-btn {
+    width: 100%;
+
+    padding: 15px;
+
+    background: var(--green);
+
+    border: none;
+
+    color: #000;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    box-shadow:
+        0 0 25px rgba(156,255,0,.35);
+}
+
+#loginError {
+    display: none;
+
+    color: var(--red);
+
+    font-size: 12px;
+
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   EARNINGS
+===================================================== */
+
+.earnings-grid {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 25px;
+}
+
+.earning-card {
+    min-height: 400px;
+
+    perspective: 1200px;
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+
+    position: relative;
+
+    padding: 35px;
+
+    border: 1px solid #222;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(156,255,0,.08),
+            transparent 60%
+        ),
+        #070707;
+
+    backface-visibility: hidden;
+
+    transition: transform .8s;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.card-front {
+    align-items: center;
+
+    text-align: center;
+}
+
+.card-back {
+    display: none;
+}
+
+.earning-card.flipped .card-front {
+    display: none;
+}
+
+.earning-card.flipped .card-back {
+    display: flex;
+}
+
+.card-number {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    color: var(--green);
+
+    font-size: 12px;
+}
+
+.big-letter,
+.org-symbol {
+    font-size: 110px;
+
+    font-weight: 900;
+
+    color: var(--green);
+
+    text-shadow:
+        0 0 25px rgba(156,255,0,.25);
+}
+
+.org-symbol {
+    font-size: 75px;
+}
+
+.card-front h2,
+.card-back h2 {
+    letter-spacing: 2px;
+
+    margin: 10px 0 25px;
+}
+
+.card-front button,
+.card-back button {
+    padding: 11px 22px;
+
+    background: transparent;
+
+    color: var(--green);
+
+    border: 1px solid var(--green);
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.card-front button:hover,
+.card-back button:hover {
+    background: var(--green);
+
+    color: #000;
+}
+
+.stats {
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.stats div {
+    padding: 15px;
+
+    border: 1px solid #202020;
+
+    background: #050505;
+}
+
+.stats small {
+    display: block;
+
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.stats strong {
+    font-size: 17px;
+}
+
+.green {
+    color: var(--green) !important;
+}
+
+.orange {
+    color: var(--orange) !important;
+}
+
+.red {
+    color: var(--red) !important;
+}
+
+
+/* =====================================================
+   GRAPH
+===================================================== */
+
+.graph-box {
+    max-width: 1100px;
+
+    height: 500px;
+
+    margin: auto;
+
+    border: 1px solid #222;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(156,255,0,.05),
+            transparent
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.graph-placeholder {
+    text-align: center;
+
+    color: #777;
+}
+
+.graph-icon {
+    font-size: 65px;
+
+    margin-bottom: 20px;
+}
+
+.graph-placeholder h2 {
+    color: #fff;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.graph-line {
+    margin-top: 35px;
+
+    color: var(--green);
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   MANAGEMENT
+===================================================== */
+
+.management-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.person-card {
+    padding: 40px 25px;
+
+    background: #080808;
+
+    border: 1px solid #222;
+
+    transition: .3s;
+}
+
+.person-card:hover {
+    border-color: var(--green);
+
+    transform: translateY(-5px);
+}
+
+.person-card span {
+    color: var(--green);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+.person-card h2 {
+    margin: 20px 0 10px;
+
+    font-size: 20px;
+}
+
+.person-card p {
+    color: #777;
+}
+
+
+/* =====================================================
+   LINEUPS
+===================================================== */
+
+.lineup-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 20px;
+}
+
+.lineup-card {
+    padding: 35px;
+
+    border: 1px solid #222;
+
+    background: #080808;
+
+    transition: .3s;
+}
+
+.lineup-card:hover {
+    border-color: var(--green);
+}
+
+.lineup-card span {
+    color: #666;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+.lineup-card h2 {
+    margin: 15px 0;
+
+    font-size: 23px;
+}
+
+.coming-soon {
+    opacity: .6;
+}
+
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+.achievement-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.achievement-card {
+    padding: 35px;
+
+    background: #080808;
+
+    border: 1px solid #222;
+}
+
+.achievement-card strong {
+    color: var(--green);
+
+    font-size: 35px;
+}
+
+.achievement-card h2 {
+    margin: 25px 0 10px;
+}
+
+.achievement-card p {
+    color: #777;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+    max-width: 850px;
+
+    margin: auto;
+
+    border-left: 1px solid var(--green);
+
+    padding-left: 40px;
+}
+
+.timeline-item {
+    position: relative;
+
+    margin-bottom: 50px;
+}
+
+.timeline-item::before {
+    content: "";
+
+    position: absolute;
+
+    left: -47px;
+    top: 5px;
+
+    width: 13px;
+    height: 13px;
+
+    background: var(--green);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px var(--green);
+}
+
+.timeline-item span {
+    color: var(--green);
+
+    letter-spacing: 3px;
+}
+
+.timeline-item h2 {
+    margin: 12px 0;
+}
+
+.timeline-item p {
+    color: #777;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-box {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 55px;
+
+    background: #080808;
+
+    border: 1px solid #222;
+
+    line-height: 2;
+
+    color: #aaa;
+
+    font-size: 16px;
+}
+
+.about-box strong {
+    color: var(--green);
+}
+
+.about-tag {
+    margin-top: 35px;
+
+    color: var(--green);
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   JOIN
+===================================================== */
+
+.join-content {
+    max-width: 800px;
+
+    margin: 15vh auto;
+
+    text-align: center;
+}
+
+.join-content h1 {
+    font-size: clamp(40px,7vw,80px);
+
+    margin-bottom: 20px;
+}
+
+.join-content > p {
+    color: #777;
+
+    line-height: 1.8;
+}
+
+.social-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 40px;
+}
+
+.social-btn {
+    padding: 16px 30px;
+
+    border: 1px solid var(--green);
+
+    color: var(--green);
+
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.social-btn:hover {
+    background: var(--green);
+
+    color: #000;
+}
+
+
+/* =====================================================
    ANIMATIONS
-========================================= */
+===================================================== */
 
-@keyframes logoEnter {
+@keyframes logoZoom {
 
     0% {
         opacity: 0;
-        transform: scale(1.35);
+        transform: scale(1.5);
         filter: brightness(0);
     }
 
@@ -314,22 +1054,7 @@ body {
     }
 }
 
-
-@keyframes logoGlow {
-
-    from {
-        filter:
-            drop-shadow(0 0 0 rgba(156, 255, 0, 0));
-    }
-
-    to {
-        filter:
-            drop-shadow(0 0 18px rgba(156, 255, 0, .35));
-    }
-}
-
-
-@keyframes buttonEnter {
+@keyframes buttonIn {
 
     from {
         opacity: 0;
@@ -338,80 +1063,70 @@ body {
 
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(-50%);
     }
 }
 
-
-@keyframes nextTextEnter {
+@keyframes nextText {
 
     from {
         opacity: 0;
-        transform: scale(.85);
+        transform: scale(.8);
         letter-spacing: 20px;
     }
 
     to {
         opacity: 1;
         transform: scale(1);
-        letter-spacing: 8px;
+        letter-spacing: 7px;
     }
 }
 
 
-@keyframes introBackground {
-
-    from {
-        background: #000;
-    }
-
-    to {
-        background: #000;
-    }
-}
-
-
-/* =========================================
+/* =====================================================
    MOBILE
-========================================= */
+===================================================== */
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
 
-    .logo {
-        width: 75vw;
+    .page-content {
+        padding: 50px 0;
     }
 
-    .next-btn {
-        bottom: 45px;
-
-        padding: 12px 32px;
-
-        font-size: 12px;
-    }
-
-    .next-page h1 {
-        padding: 20px;
-
-        font-size: 32px;
-
-        letter-spacing: 4px;
-    }
-
-    .menu-container h2 {
-        margin-bottom: 30px;
-
-        letter-spacing: 4px;
-    }
-
-    .menu-grid {
+    .menu-grid,
+    .earnings-grid,
+    .lineup-grid {
         grid-template-columns: 1fr;
-
-        gap: 12px;
     }
 
-    .menu-grid button {
-        min-height: 65px;
-
-        font-size: 12px;
+    .management-grid,
+    .achievement-grid {
+        grid-template-columns: 1fr;
     }
+
+    .menu-card {
+        min-height: 100px;
+    }
+
+    .inner-page {
+        padding: 80px 20px 40px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-box {
+        padding: 30px 20px;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+
+    .back-btn {
+        top: 15px;
+        left: 15px;
+    }
+
 }
