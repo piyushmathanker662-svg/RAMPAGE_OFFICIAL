@@ -1,1 +1,417 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000;
+    color: #fff;
+}
+
+
+/* =========================================
+   INTRO SCREEN
+========================================= */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    background: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+
+    animation: introBackground 1s ease forwards;
+}
+
+
+.logo {
+    width: min(55vw, 650px);
+    max-width: 80%;
+    height: auto;
+
+    opacity: 0;
+
+    animation:
+        logoEnter 1.8s cubic-bezier(.16, 1, .3, 1) .3s forwards,
+        logoGlow 2s ease-in-out 2s infinite alternate;
+}
+
+
+/* =========================================
+   NEXT BUTTON
+========================================= */
+
+.next-btn {
+    position: absolute;
+
+    bottom: 70px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 14px 45px;
+
+    background: transparent;
+
+    color: #9cff00;
+
+    border: 1px solid #9cff00;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    animation: buttonEnter 1s ease 1.8s forwards;
+
+    transition: .3s ease;
+
+    box-shadow:
+        0 0 10px rgba(156, 255, 0, .15);
+}
+
+
+.next-btn:hover {
+    background: #9cff00;
+    color: #000;
+
+    box-shadow:
+        0 0 20px rgba(156, 255, 0, .6),
+        0 0 50px rgba(156, 255, 0, .25);
+
+    transform: translateX(-50%) scale(1.05);
+}
+
+
+/* =========================================
+   THE NEXT PAGE
+========================================= */
+
+.next-page {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 90;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .6s ease;
+}
+
+
+.next-page.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.next-page h1 {
+    text-align: center;
+
+    font-size: clamp(30px, 6vw, 90px);
+
+    letter-spacing: 8px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 10px rgba(156, 255, 0, .5),
+        0 0 30px rgba(156, 255, 0, .25);
+
+    animation: nextTextEnter .8s ease forwards;
+}
+
+
+/* =========================================
+   MAIN MENU
+========================================= */
+
+.main-menu {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(80, 130, 0, .12),
+            transparent 45%
+        ),
+        #050505;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 50;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+
+.main-menu.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.menu-container {
+    width: min(1100px, 90%);
+
+    text-align: center;
+}
+
+
+.menu-container h2 {
+    margin-bottom: 50px;
+
+    font-size: clamp(28px, 4vw, 55px);
+
+    letter-spacing: 8px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 15px rgba(156, 255, 0, .4);
+}
+
+
+/* =========================================
+   MENU GRID
+========================================= */
+
+.menu-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+
+    max-width: 850px;
+
+    margin: auto;
+}
+
+
+.menu-grid button {
+    min-height: 85px;
+
+    background: rgba(10, 10, 10, .8);
+
+    border: 1px solid rgba(156, 255, 0, .35);
+
+    color: #fff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: .35s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.menu-grid button::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #9cff00;
+
+    transform: scaleY(0);
+
+    transition: .35s ease;
+}
+
+
+.menu-grid button:hover {
+    background: rgba(156, 255, 0, .08);
+
+    border-color: #9cff00;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px rgba(156, 255, 0, .12);
+}
+
+
+.menu-grid button:hover::before {
+    transform: scaleY(1);
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes logoEnter {
+
+    0% {
+        opacity: 0;
+        transform: scale(1.35);
+        filter: brightness(0);
+    }
+
+    60% {
+        opacity: 1;
+        filter: brightness(1.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+
+@keyframes logoGlow {
+
+    from {
+        filter:
+            drop-shadow(0 0 0 rgba(156, 255, 0, 0));
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 18px rgba(156, 255, 0, .35));
+    }
+}
+
+
+@keyframes buttonEnter {
+
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+
+@keyframes nextTextEnter {
+
+    from {
+        opacity: 0;
+        transform: scale(.85);
+        letter-spacing: 20px;
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: 8px;
+    }
+}
+
+
+@keyframes introBackground {
+
+    from {
+        background: #000;
+    }
+
+    to {
+        background: #000;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .logo {
+        width: 75vw;
+    }
+
+    .next-btn {
+        bottom: 45px;
+
+        padding: 12px 32px;
+
+        font-size: 12px;
+    }
+
+    .next-page h1 {
+        padding: 20px;
+
+        font-size: 32px;
+
+        letter-spacing: 4px;
+    }
+
+    .menu-container h2 {
+        margin-bottom: 30px;
+
+        letter-spacing: 4px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .menu-grid button {
+        min-height: 65px;
+
+        font-size: 12px;
+    }
+}
