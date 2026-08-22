@@ -62,11 +62,13 @@ function openPage(pageId) {
 
     const selectedPage = document.getElementById(pageId);
 
-    if (selectedPage) {
+    if (pageId === "pnlPage") {
 
-        selectedPage.classList.add("active");
+    setTimeout(() => {
+        createPnlChart();
+    }, 100);
 
-    }
+}
 
 }
 
