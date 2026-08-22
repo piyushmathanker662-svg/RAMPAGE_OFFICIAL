@@ -1,46 +1,55 @@
 /* =====================================================
    RAMPAGE OFFICIAL
-   MAIN SCRIPT
+   COMPLETE SCRIPT.JS
 ===================================================== */
 
 
 /* =====================================================
-   ELEMENTS
+   GLOBAL ELEMENTS
 ===================================================== */
 
 const intro = document.getElementById("intro");
-const nextBtn = document.getElementById("nextBtn");
 const nextPage = document.getElementById("nextPage");
 const mainMenu = document.getElementById("mainMenu");
+const nextBtn = document.getElementById("nextBtn");
 
 
 /* =====================================================
-   INTRO → NEXT PAGE → MENU
+   INTRO
+   INTRO → TAGLINE → MAIN MENU
 ===================================================== */
 
 if (nextBtn) {
 
-    nextBtn.addEventListener("click", function () {
+    nextBtn.addEventListener("click", () => {
 
+        nextBtn.disabled = true;
+
+        // Hide intro
         intro.classList.add("hide");
 
-        setTimeout(function () {
+        // Show tagline page
+        setTimeout(() => {
 
             nextPage.classList.add("show");
 
-            setTimeout(function () {
-
-                nextPage.classList.remove("show");
-
-                setTimeout(function () {
-
-                    mainMenu.classList.add("active");
-
-                }, 600);
-
-            }, 3000);
-
         }, 700);
+
+
+        // Hide tagline
+        setTimeout(() => {
+
+            nextPage.classList.remove("show");
+
+        }, 3500);
+
+
+        // Open main menu
+        setTimeout(() => {
+
+            mainMenu.classList.add("active");
+
+        }, 4200);
 
     });
 
@@ -48,45 +57,73 @@ if (nextBtn) {
 
 
 /* =====================================================
-   OPEN PAGE
+   OPEN ANY PAGE
 ===================================================== */
 
 function openPage(pageId) {
 
-    document.querySelectorAll(".page").forEach(function(page) {
-
+    // Hide every page
+    document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
-
     });
 
 
+    // Hide main menu
+    mainMenu.classList.remove("active");
+
+
+    // Selected page
     const selectedPage = document.getElementById(pageId);
 
-    if (pageId === "pnlPage") {
+    if (!selectedPage) {
+        console.error("Page not found:", pageId);
+        return;
+    }
 
+
+    // Show selected page
     setTimeout(() => {
-        createPnlChart();
+
+        selectedPage.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
     }, 100);
 
-}
+
+    // Create P&L graph whenever P&L page opens
+    if (pageId === "pnlPage") {
+
+        setTimeout(() => {
+            createPNLGraph();
+        }, 200);
+
+    }
 
 }
 
 
 /* =====================================================
-   GO HOME
+   GO BACK TO MAIN MENU
 ===================================================== */
 
 function goHome() {
 
-    document.querySelectorAll(".page").forEach(function(page) {
-
+    document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
-
     });
 
 
     mainMenu.classList.add("active");
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
@@ -96,10 +133,10 @@ function goHome() {
 ===================================================== */
 
 /*
-   EARNINGS LOGIN
+    LOGIN DETAILS
 
-   ID       : RAMPAGE
-   PASSWORD : 1234
+    ID       : RAMPAGE
+    PASSWORD : 1234
 */
 
 const earningsID = "RAMPAGE";
@@ -108,45 +145,58 @@ const earningsPassword = "1234";
 
 function loginEarnings() {
 
-    const idElement =
-        document.getElementById("loginId");
-
-    const passwordElement =
-        document.getElementById("loginPassword");
-
-    const error =
-        document.getElementById("loginError");
+    const idInput = document.getElementById("loginId");
+    const passwordInput = document.getElementById("loginPassword");
+    const error = document.getElementById("loginError");
 
 
-    if (!idElement || !passwordElement || !error) {
+    if (!idInput || !passwordInput || !error) {
         return;
     }
 
 
-    const id =
-        idElement.value.trim();
-
-    const password =
-        passwordElement.value;
+    const enteredID = idInput.value.trim();
+    const enteredPassword = passwordInput.value;
 
 
+    // Correct login
     if (
-        id === earningsID &&
-        password === earningsPassword
+        enteredID === earningsID &&
+        enteredPassword === earningsPassword
     ) {
 
         error.style.display = "none";
 
-        idElement.value = "";
-        passwordElement.value = "";
 
+        // Clear inputs
+        idInput.value = "";
+        passwordInput.value = "";
+
+
+        // Open earnings
         openPage("earningsPage");
 
     }
 
+    // Wrong login
     else {
 
         error.style.display = "block";
+
+
+        // Small shake animation
+        const loginBox =
+            document.querySelector(".login-box");
+
+        if (loginBox) {
+
+            loginBox.classList.remove("login-shake");
+
+            void loginBox.offsetWidth;
+
+            loginBox.classList.add("login-shake");
+
+        }
 
     }
 
@@ -157,30 +207,27 @@ function loginEarnings() {
    ENTER KEY LOGIN
 ===================================================== */
 
-const loginPassword =
+const passwordInput =
     document.getElementById("loginPassword");
 
 
-if (loginPassword) {
+if (passwordInput) {
 
-    loginPassword.addEventListener(
-        "keydown",
-        function(event) {
+    passwordInput.addEventListener("keydown", event => {
 
-            if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
-                loginEarnings();
-
-            }
+            loginEarnings();
 
         }
-    );
+
+    });
 
 }
 
 
 /* =====================================================
-   FLIP EARNING CARDS
+   FLIP EARNINGS CARDS
 ===================================================== */
 
 function flipCard(button) {
@@ -189,7 +236,9 @@ function flipCard(button) {
         button.closest(".earning-card");
 
 
-    if (!card) return;
+    if (!card) {
+        return;
+    }
 
 
     card.classList.toggle("flipped");
@@ -198,7 +247,7 @@ function flipCard(button) {
 
 
 /* =====================================================
-   ORGANISATION DATA
+   EARNINGS DATA
 ===================================================== */
 
 const organisationData = {
@@ -215,18 +264,20 @@ const organisationData = {
 
 
 /* =====================================================
-   FORMAT MONEY
+   MONEY FORMAT
 ===================================================== */
 
 function formatMoney(amount) {
 
-    const sign = amount < 0 ? "-" : "";
+    const sign =
+        amount < 0 ? "-" : "";
 
-    const value =
+
+    const formatted =
         Math.abs(amount).toLocaleString("en-IN");
 
 
-    return sign + "₹" + value;
+    return sign + "₹" + formatted;
 
 }
 
@@ -238,31 +289,32 @@ function formatMoney(amount) {
 function updateOrganisationCard() {
 
     const cards =
-        document.querySelectorAll(
-            ".organisation-card"
-        );
+        document.querySelectorAll(".organisation-card");
 
 
-    if (!cards.length) return;
+    if (!cards.length) {
+        return;
+    }
 
 
-    cards.forEach(function(card) {
+    cards.forEach(card => {
 
         const stats =
-            card.querySelectorAll(
-                ".stats strong"
-            );
+            card.querySelectorAll(".stats strong");
 
 
         if (stats.length >= 3) {
 
             stats[0].textContent =
-                organisationData.amountOfSlots.toLocaleString("en-IN");
+                organisationData.amountOfSlots
+                .toLocaleString("en-IN");
+
 
             stats[1].textContent =
                 formatMoney(
                     organisationData.totalEarning
                 );
+
 
             stats[2].textContent =
                 (organisationData.profitLoss >= 0 ? "+" : "") +
@@ -279,42 +331,42 @@ function updateOrganisationCard() {
 
 /* =====================================================
    P&L DATA
-   JUST CHANGE VALUES HERE IN FUTURE
+   CHANGE ONLY VALUES HERE
 ===================================================== */
 
 const pnlData = [
 
     {
         month: "May 2026",
-        value: 245
-    },
-
-    {
-        month: "June 2026",
         value: 743
     },
 
     {
+        month: "June 2026",
+        value: 315
+    },
+
+    {
         month: "July 2026",
-        value: -315
+        value: 427
     },
 
     {
         month: "August 2026",
-        value: 427
+        value: 0
     }
 
 ];
 
 
 /* =====================================================
-   P&L TOTAL
+   CALCULATE TOTAL P&L
 ===================================================== */
 
 function calculatePNLTotal() {
 
     return pnlData.reduce(
-        function(total, item) {
+        (total, item) => {
 
             return total + item.value;
 
@@ -335,47 +387,57 @@ function createPNLGraph() {
         document.querySelector(".graph-box");
 
 
-    if (!graphBox) return;
+    if (!graphBox) {
+        return;
+    }
 
 
+    // Clear old graph
     graphBox.innerHTML = "";
 
+
+    /* =================================================
+       GRAPH WRAPPER
+    ================================================= */
 
     const graph =
         document.createElement("div");
 
-    graph.className = "pnl-chart";
+    graph.className =
+        "pnl-chart";
 
 
-    /* ---------------------------------------------
-       HEADER
-    --------------------------------------------- */
+    /* =================================================
+       GRAPH TITLE
+    ================================================= */
 
     const title =
         document.createElement("div");
 
-    title.className = "pnl-chart-title";
+    title.className =
+        "pnl-chart-title";
 
     title.textContent =
-        "P&L VS MONTH";
+        "RAMPAGE FINANCIAL PERFORMANCE";
 
 
     graph.appendChild(title);
 
 
-    /* ---------------------------------------------
+    /* =================================================
        GRAPH AREA
-    --------------------------------------------- */
+    ================================================= */
 
     const chartArea =
         document.createElement("div");
 
-    chartArea.className = "pnl-chart-area";
+    chartArea.className =
+        "pnl-chart-area";
 
 
-    /* ---------------------------------------------
-       FIND MAX / MIN
-    --------------------------------------------- */
+    /* =================================================
+       VALUES
+    ================================================= */
 
     const values =
         pnlData.map(item => item.value);
@@ -384,24 +446,31 @@ function createPNLGraph() {
     let maxValue =
         Math.max(...values, 0);
 
+
     let minValue =
         Math.min(...values, 0);
 
 
-    const padding =
+    // Graph padding
+    const range =
         Math.max(
             Math.abs(maxValue),
-            Math.abs(minValue)
-        ) * 0.25;
+            Math.abs(minValue),
+            100
+        );
 
 
-    maxValue += padding;
-    minValue -= padding;
+    maxValue =
+        range * 1.25;
 
 
-    /* ---------------------------------------------
+    minValue =
+        -range * 1.25;
+
+
+    /* =================================================
        ZERO LINE
-    --------------------------------------------- */
+    ================================================= */
 
     const zeroPercent =
         ((maxValue) /
@@ -422,9 +491,9 @@ function createPNLGraph() {
     chartArea.appendChild(zeroLine);
 
 
-    /* ---------------------------------------------
+    /* =================================================
        Y AXIS LABELS
-    --------------------------------------------- */
+    ================================================= */
 
     const maxLabel =
         document.createElement("div");
@@ -443,7 +512,7 @@ function createPNLGraph() {
         "pnl-y-label pnl-zero";
 
     zeroLabel.textContent =
-        "0";
+        "₹0";
 
 
     const minLabel =
@@ -461,38 +530,47 @@ function createPNLGraph() {
     chartArea.appendChild(minLabel);
 
 
-    /* ---------------------------------------------
-       POINTS
-    --------------------------------------------- */
+    /* =================================================
+       CREATE POINTS
+    ================================================= */
 
-    pnlData.forEach(function(item, index) {
+    pnlData.forEach((item, index) => {
 
         const wrapper =
             document.createElement("div");
+
 
         wrapper.className =
             "pnl-point-wrapper";
 
 
-        const percent =
+        const x =
+            pnlData.length === 1
+            ? 50
+            : (index /
+            (pnlData.length - 1)) *
+            90 + 5;
+
+
+        const y =
             ((maxValue - item.value) /
-            (maxValue - minValue)) * 100;
+            (maxValue - minValue)) *
+            100;
 
 
         wrapper.style.left =
-            (index /
-            Math.max(pnlData.length - 1, 1)) *
-            90 + 5 + "%";
+            x + "%";
 
 
         wrapper.style.top =
-            percent + "%";
+            y + "%";
 
 
         /* POINT */
 
         const point =
             document.createElement("div");
+
 
         point.className =
             "pnl-point";
@@ -516,20 +594,24 @@ function createPNLGraph() {
         const value =
             document.createElement("div");
 
+
         value.className =
             "pnl-value";
 
 
         value.textContent =
-            (item.value >= 0 ? "+" : "") +
-            "₹" +
-            Math.abs(item.value);
+            item.value === 0
+            ? "₹0"
+            : (item.value > 0 ? "+" : "-") +
+              "₹" +
+              Math.abs(item.value);
 
 
         /* MONTH */
 
         const month =
             document.createElement("div");
+
 
         month.className =
             "pnl-month";
@@ -551,9 +633,9 @@ function createPNLGraph() {
     });
 
 
-    /* ---------------------------------------------
-       CONNECTING LINES
-    --------------------------------------------- */
+    /* =================================================
+       CONNECT POINTS
+    ================================================= */
 
     for (
         let i = 0;
@@ -570,24 +652,26 @@ function createPNLGraph() {
 
         const currentX =
             (i /
-            Math.max(pnlData.length - 1, 1)) *
+            (pnlData.length - 1)) *
             90 + 5;
 
 
         const nextX =
             ((i + 1) /
-            Math.max(pnlData.length - 1, 1)) *
+            (pnlData.length - 1)) *
             90 + 5;
 
 
         const currentY =
             ((maxValue - current.value) /
-            (maxValue - minValue)) * 100;
+            (maxValue - minValue)) *
+            100;
 
 
         const nextY =
             ((maxValue - next.value) /
-            (maxValue - minValue)) * 100;
+            (maxValue - minValue)) *
+            100;
 
 
         const dx =
@@ -630,9 +714,7 @@ function createPNLGraph() {
 
 
         line.style.transform =
-            "rotate(" +
-            angle +
-            "deg)";
+            `rotate(${angle}deg)`;
 
 
         chartArea.insertBefore(
@@ -643,12 +725,16 @@ function createPNLGraph() {
     }
 
 
+    /* =================================================
+       ADD GRAPH
+    ================================================= */
+
     graph.appendChild(chartArea);
 
 
-    /* ---------------------------------------------
-       TOTAL
-    --------------------------------------------- */
+    /* =================================================
+       TOTAL P&L
+    ================================================= */
 
     const total =
         calculatePNLTotal();
@@ -662,19 +748,34 @@ function createPNLGraph() {
         "pnl-total";
 
 
-    totalBox.innerHTML =
+    const totalStatus =
+        total > 0
+        ? "PROFIT"
+        : total < 0
+        ? "LOSS"
+        : "NO DATA";
 
-        "TOTAL P&L " +
 
-        "<strong class='" +
-        (total >= 0 ? "green" : "red") +
-        "'>" +
+    totalBox.innerHTML = `
 
-        (total >= 0 ? "+" : "") +
+        <small>TOTAL P&L</small>
 
-        formatMoney(total) +
+        <strong class="${
+            total > 0
+            ? "green"
+            : total < 0
+            ? "red"
+            : "orange"
+        }">
 
-        "</strong>";
+            ${total >= 0 ? "+" : ""}
+            ${formatMoney(total)}
+
+        </strong>
+
+        <span>${totalStatus}</span>
+
+    `;
 
 
     graph.appendChild(totalBox);
@@ -686,19 +787,168 @@ function createPNLGraph() {
 
 
 /* =====================================================
-   INITIALIZE DATA
+   UPDATE MONTHLY P&L CARDS
+===================================================== */
+
+function updateMonthlyCards() {
+
+    const cards =
+        document.querySelectorAll(".monthly-card");
+
+
+    if (!cards.length) {
+        return;
+    }
+
+
+    cards.forEach((card, index) => {
+
+        if (!pnlData[index]) {
+            return;
+        }
+
+
+        const data =
+            pnlData[index];
+
+
+        const value =
+            card.querySelector("strong");
+
+
+        const status =
+            card.querySelector("span");
+
+
+        if (value) {
+
+            value.textContent =
+                formatMoney(data.value);
+
+        }
+
+
+        if (status) {
+
+            if (data.value > 0) {
+
+                status.textContent =
+                    "PROFIT";
+
+                status.className =
+                    "profit-text";
+
+            }
+
+            else if (data.value < 0) {
+
+                status.textContent =
+                    "LOSS";
+
+                status.className =
+                    "loss-text";
+
+            }
+
+            else {
+
+                status.textContent =
+                    "NO DATA";
+
+                status.className =
+                    "neutral-text";
+
+            }
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   UPDATE P&L SUMMARY
+===================================================== */
+
+function updatePNLSummary() {
+
+    const total =
+        calculatePNLTotal();
+
+
+    const totalElement =
+        document.getElementById("totalPnl");
+
+
+    const statusElement =
+        document.getElementById("pnlStatus");
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            formatMoney(total);
+
+    }
+
+
+    if (statusElement) {
+
+        if (total > 0) {
+
+            statusElement.textContent =
+                "PROFIT";
+
+            statusElement.className =
+                "green";
+
+        }
+
+        else if (total < 0) {
+
+            statusElement.textContent =
+                "LOSS";
+
+            statusElement.className =
+                "red";
+
+        }
+
+        else {
+
+            statusElement.textContent =
+                "NO DATA";
+
+            statusElement.className =
+                "orange";
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZE WEBSITE
 ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    () => {
 
         updateOrganisationCard();
 
+        updateMonthlyCards();
+
+        updatePNLSummary();
+
         createPNLGraph();
 
+
         console.log(
-            "RAMPAGE OFFICIAL PORTAL INITIALIZED."
+            "RAMPAGE OFFICIAL WEBSITE LOADED."
         );
 
     }
@@ -707,11 +957,12 @@ document.addEventListener(
 
 /* =====================================================
    ESC KEY
+   RETURN TO MENU
 ===================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (event.key === "Escape") {
 
@@ -721,3 +972,32 @@ document.addEventListener(
 
     }
 );
+
+
+/* =====================================================
+   PREVENT EMPTY SOCIAL LINKS
+===================================================== */
+
+document.querySelectorAll(
+    '.social-btn[href="#"]'
+).forEach(link => {
+
+    link.addEventListener("click", event => {
+
+        event.preventDefault();
+
+    });
+
+});
+
+
+/* =====================================================
+   CONSOLE BRANDING
+===================================================== */
+
+console.log(`
+========================================
+        RAMPAGE ESPORTS
+        THE NEXT PAGE IS RAMPAGE
+========================================
+`);
