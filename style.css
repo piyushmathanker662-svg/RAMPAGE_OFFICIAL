@@ -1,874 +1,360 @@
+/* ================================
+   RAMPAGE ESPORTS - MAIN CSS
+   ================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #000;
-    color: #fff;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: #ffffff;
     overflow-x: hidden;
 }
 
-button,
-input {
-    font-family: inherit;
+/* ================================
+   SCROLLBAR
+   ================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-:root {
-    --green: #9cff00;
-    --dark-green: #5f9900;
-    --black: #000;
-    --white: #fff;
-    --grey: #999;
-    --red: #ff3333;
-    --orange: #ffb000;
+::-webkit-scrollbar-track {
+    background: #050505;
 }
 
+::-webkit-scrollbar-thumb {
+    background: #39ff14;
+    border-radius: 10px;
+}
 
-/* =====================================================
-   GLOBAL SCREENS
-===================================================== */
+/* ================================
+   NAVBAR
+   ================================ */
 
-.screen,
-.page {
+.navbar {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
-}
-
-
-/* =====================================================
-   INTRO SCREEN
-===================================================== */
-
-.intro-screen {
-    background: #000;
+    height: 75px;
+    z-index: 1000;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
 
-    z-index: 100;
+    padding: 0 7%;
 
-    opacity: 1;
-    visibility: visible;
+    background: rgba(0, 0, 0, 0.92);
+    border-bottom: 1px solid rgba(57, 255, 20, 0.25);
 
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
+    backdrop-filter: blur(10px);
 }
 
-.intro-screen.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #39ff14;
+    letter-spacing: 2px;
 }
 
-.intro-logo-wrap {
+.logo span {
+    color: white;
+}
+
+.nav-links {
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    animation: logoZoom 1.8s cubic-bezier(.16, 1, .3, 1);
+    gap: 35px;
+    list-style: none;
 }
 
-.main-logo {
-    display: block;
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
 
-    width: min(600px, 70vw);
-    max-width: 80vw;
-    height: auto;
-
-    filter:
-        drop-shadow(0 0 20px rgba(156, 255, 0, .20));
+    transition: 0.3s;
 }
 
+.nav-links a:hover,
+.nav-links a.active {
+    color: #39ff14;
+}
 
-/* =====================================================
-   NEXT BUTTON
-===================================================== */
+/* Mobile Menu */
 
-.next-btn {
-    position: absolute;
-
-    left: 50%;
-    bottom: 45px;
-
-    transform: translateX(-50%);
-
-    min-width: 150px;
-
-    padding: 14px 40px;
-
-    background: transparent;
-
-    color: var(--green);
-
-    border: 1px solid var(--green);
-
-    outline: none;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    letter-spacing: 5px;
-
+.menu-btn {
+    display: none;
+    font-size: 30px;
+    color: #39ff14;
     cursor: pointer;
-
-    z-index: 110;
-
-    animation: buttonIn 1s 1.5s both;
-
-    transition:
-        background .3s ease,
-        color .3s ease,
-        box-shadow .3s ease,
-        transform .3s ease;
 }
 
-.next-btn:hover {
-    background: var(--green);
+/* ================================
+   HERO SECTION
+   ================================ */
 
-    color: #000;
-
-    box-shadow:
-        0 0 20px rgba(156, 255, 0, .7),
-        0 0 50px rgba(156, 255, 0, .25);
-
-    transform: translateX(-50%) scale(1.05);
-}
-
-.next-btn:active {
-    transform: translateX(-50%) scale(.97);
-}
-
-
-/* =====================================================
-   NEXT PAGE
-===================================================== */
-
-.next-page {
-    background: #000;
+.hero {
+    min-height: 100vh;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    z-index: 90;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity .6s ease,
-        visibility .6s ease;
-}
-
-.next-page.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.next-title {
     text-align: center;
 
-    padding: 20px;
+    padding: 120px 20px 80px;
 
-    letter-spacing: 7px;
+    position: relative;
+    overflow: hidden;
 
-    animation: nextText .9s both;
-}
-
-.next-title span {
-    display: block;
-
-    margin-bottom: 15px;
-
-    color: #aaa;
-
-    font-size: clamp(15px, 2vw, 28px);
-}
-
-.next-title strong {
-    display: block;
-
-    color: var(--green);
-
-    font-size: clamp(45px, 9vw, 130px);
-
-    line-height: 1;
-
-    text-shadow:
-        0 0 15px rgba(156, 255, 0, .4),
-        0 0 50px rgba(156, 255, 0, .15);
-}
-
-
-/* =====================================================
-   ALL PAGES
-===================================================== */
-
-.page {
     background:
         radial-gradient(
             circle at center,
-            rgba(100, 150, 0, .12),
-            transparent 50%
+            rgba(57, 255, 20, 0.12),
+            transparent 45%
         ),
-        #030303;
-
-    opacity: 0;
-    visibility: hidden;
-
-    overflow-y: auto;
-
-    transition:
-        opacity .7s ease,
-        visibility .7s ease;
+        #050505;
 }
 
-.page.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-/* =====================================================
-   MAIN MENU
-===================================================== */
-
-.page-content {
-    width: min(1150px, 90%);
-
-    margin: auto;
-
-    padding: 70px 0;
-}
-
-.brand-small {
-    margin-bottom: 25px;
-
-    color: var(--green);
-
-    font-size: 13px;
-
-    letter-spacing: 5px;
-}
-
-.brand-small span {
-    color: #fff;
-}
-
-.main-heading {
-    font-size: clamp(30px, 5vw, 65px);
-
-    line-height: 1;
-
-    letter-spacing: 3px;
-}
-
-.main-heading span,
-.page-header h1 span,
-.join-content h1 span {
-    color: var(--green);
-}
-
-.menu-subtitle {
-    margin-top: 15px;
-
-    color: #777;
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-}
-
-
-/* =====================================================
-   MENU CARDS
-===================================================== */
-
-.menu-grid {
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 18px;
-
-    margin-top: 55px;
-}
-
-.menu-card {
-    position: relative;
-
-    min-height: 120px;
-
-    padding: 25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(20, 20, 20, .95),
-            rgba(5, 5, 5, .95)
-        );
-
-    border: 1px solid #202020;
-
-    color: #fff;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    overflow: hidden;
-
-    transition:
-        transform .35s ease,
-        border-color .35s ease,
-        box-shadow .35s ease;
-}
-
-.menu-card::before {
+.hero::before {
     content: "";
 
     position: absolute;
+    width: 500px;
+    height: 500px;
 
-    left: 0;
-    top: 0;
+    border: 1px solid rgba(57, 255, 20, 0.15);
+    border-radius: 50%;
 
-    width: 3px;
-    height: 100%;
-
-    background: var(--green);
-
-    transform: scaleY(0);
-
-    transform-origin: center;
-
-    transition: transform .35s ease;
+    animation: rotateCircle 15s linear infinite;
 }
 
-.menu-card:hover {
-    border-color: var(--green);
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: clamp(50px, 8vw, 100px);
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    color: white;
+
+    text-transform: uppercase;
+}
+
+.hero h1 span {
+    color: #39ff14;
+    text-shadow: 0 0 25px rgba(57, 255, 20, 0.5);
+}
+
+.hero p {
+    margin-top: 20px;
+
+    font-size: 18px;
+    color: #bdbdbd;
+
+    letter-spacing: 2px;
+}
+
+.tagline {
+    margin-top: 10px;
+
+    color: #39ff14 !important;
+
+    font-weight: bold;
+}
+
+/* Hero Buttons */
+
+.hero-buttons {
+    margin-top: 35px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+
+    padding: 14px 30px;
+
+    border: 1px solid #39ff14;
+
+    color: #39ff14;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    background: transparent;
+}
+
+.btn:hover {
+    background: #39ff14;
+    color: #000;
+
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.5);
+
+    transform: translateY(-3px);
+}
+
+.btn-primary {
+    background: #39ff14;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: #39ff14;
+}
+
+/* ================================
+   GENERAL SECTION
+   ================================ */
+
+section {
+    padding: 100px 7%;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 42px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+}
+
+.section-title h2 span {
+    color: #39ff14;
+}
+
+.section-title p {
+    margin-top: 12px;
+
+    color: #888;
+
+    font-size: 15px;
+}
+
+/* ================================
+   ABOUT
+   ================================ */
+
+.about {
+    background: #080808;
+}
+
+.about-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+
+    align-items: center;
+}
+
+.about-text h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.about-text h3 span {
+    color: #39ff14;
+}
+
+.about-text p {
+    color: #aaa;
+
+    line-height: 1.8;
+
+    margin-bottom: 15px;
+}
+
+/* Stats */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.stat-box {
+    padding: 30px;
+
+    text-align: center;
+
+    background: #0d0d0d;
+
+    border: 1px solid #1c1c1c;
+
+    transition: 0.3s;
+}
+
+.stat-box:hover {
+    border-color: #39ff14;
 
     transform: translateY(-5px);
 
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.08);
 }
 
-.menu-card:hover::before {
-    transform: scaleY(1);
+.stat-box h3 {
+    font-size: 35px;
+
+    color: #39ff14;
 }
 
-.menu-card small {
-    display: block;
-
-    margin-bottom: 15px;
-
-    color: var(--green);
-}
-
-.menu-card b {
-    display: block;
-
-    font-size: 16px;
-
-    letter-spacing: 2px;
-}
-
-.menu-card span {
-    display: block;
-
+.stat-box p {
     margin-top: 8px;
 
-    color: #777;
-
-    font-size: 12px;
+    color: #999;
 }
 
+/* ================================
+   TEAMS
+   ================================ */
 
-/* =====================================================
-   INNER PAGES
-===================================================== */
-
-.inner-page {
-    padding: 80px 6% 50px;
-
-    overflow-y: auto;
-}
-
-.page-header {
-    max-width: 1100px;
-
-    margin: 0 auto 50px;
-}
-
-.section-number {
-    margin-bottom: 15px;
-
-    color: var(--green);
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-}
-
-.page-header h1 {
-    font-size: clamp(35px, 6vw, 75px);
-
-    letter-spacing: 3px;
-}
-
-.page-header p:last-child {
-    margin-top: 15px;
-
-    color: #777;
-}
-
-.back-btn {
-    position: fixed;
-
-    top: 25px;
-    left: 25px;
-
-    z-index: 200;
-
-    padding: 10px 20px;
-
-    background: rgba(0, 0, 0, .8);
-
-    border: 1px solid #333;
-
-    color: #aaa;
-
-    cursor: pointer;
-
-    transition:
-        color .3s ease,
-        border-color .3s ease,
-        background .3s ease;
-}
-
-.back-btn:hover {
-    color: var(--green);
-
-    border-color: var(--green);
-
+.teams {
     background: #050505;
 }
 
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.login-box {
-    width: min(450px, 90%);
-
-    margin: 10vh auto;
-
-    padding: 50px 35px;
-
-    background: rgba(10, 10, 10, .95);
-
-    border: 1px solid #252525;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 70px rgba(0, 0, 0, .5);
-}
-
-.lock-icon {
-    margin-bottom: 20px;
-
-    font-size: 45px;
-}
-
-.login-box h1 {
-    margin-bottom: 15px;
-
-    font-size: 28px;
-
-    letter-spacing: 3px;
-}
-
-.login-box p {
-    margin-bottom: 25px;
-
-    color: #777;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-}
-
-.login-box input {
-    width: 100%;
-
-    margin-bottom: 12px;
-
-    padding: 15px;
-
-    background: #050505;
-
-    border: 1px solid #292929;
-
-    outline: none;
-
-    color: #fff;
-
-    transition: border-color .3s ease;
-}
-
-.login-box input:focus {
-    border-color: var(--green);
-}
-
-.login-box input::placeholder {
-    color: #555;
-}
-
-.primary-btn {
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 15px;
-
-    background: var(--green);
-
-    border: none;
-
-    color: #000;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-    cursor: pointer;
-
-    transition:
-        box-shadow .3s ease,
-        transform .3s ease;
-}
-
-.primary-btn:hover {
-    box-shadow:
-        0 0 25px rgba(156, 255, 0, .35);
-
-    transform: translateY(-2px);
-}
-
-#loginError {
-    display: none;
-
-    margin-top: 15px;
-
-    color: var(--red);
-
-    font-size: 12px;
-}
-
-
-/* =====================================================
-   EARNINGS GRID
-===================================================== */
-
-.earnings-grid {
-    max-width: 1150px;
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 25px;
-}
-
-
-/* =====================================================
-   REAL 3D FLIP CARDS
-===================================================== */
-
-.earning-card {
-    position: relative;
-
-    width: 100%;
-
-    height: 400px;
-
-    perspective: 1200px;
-
-    cursor: default;
-}
-
-.card-front,
-.card-back {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    padding: 35px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(156, 255, 0, .08),
-            transparent 60%
-        ),
-        #070707;
-
-    border: 1px solid #222;
-
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-
-    transform-style: preserve-3d;
-
-    transition:
-        transform .8s cubic-bezier(.4, .2, .2, 1);
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-}
-
-.card-front {
-    align-items: center;
-
-    text-align: center;
-
-    transform: rotateY(0deg);
-}
-
-.card-back {
-    align-items: center;
-
-    text-align: center;
-
-    transform: rotateY(180deg);
-}
-
-
-/* FLIP */
-
-.earning-card.flipped .card-front {
-    transform: rotateY(-180deg);
-}
-
-.earning-card.flipped .card-back {
-    transform: rotateY(0deg);
-}
-
-
-/* =====================================================
-   CARD CONTENT
-===================================================== */
-
-.card-number {
-    position: absolute;
-
-    top: 20px;
-    left: 25px;
-
-    color: var(--green);
-
-    font-size: 12px;
-}
-
-.big-letter,
-.org-symbol {
-    color: var(--green);
-
-    font-size: 110px;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    text-shadow:
-        0 0 25px rgba(156, 255, 0, .25);
-}
-
-.org-symbol {
-    font-size: 75px;
-}
-
-.card-front h2,
-.card-back h2 {
-    margin: 15px 0 25px;
-
-    letter-spacing: 2px;
-
-    font-size: 20px;
-}
-
-.card-front button,
-.card-back button {
-    padding: 11px 22px;
-
-    background: transparent;
-
-    border: 1px solid var(--green);
-
-    color: var(--green);
-
-    cursor: pointer;
-
-    transition:
-        background .3s ease,
-        color .3s ease,
-        box-shadow .3s ease;
-}
-
-.card-front button:hover,
-.card-back button:hover {
-    background: var(--green);
-
-    color: #000;
-
-    box-shadow:
-        0 0 20px rgba(156, 255, 0, .35);
-}
-
-
-/* =====================================================
-   CARD STATS
-===================================================== */
-
-.stats {
-    width: 100%;
-
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 12px;
-
-    margin-bottom: 25px;
-}
-
-.stats div {
-    padding: 13px;
-
-    background: #050505;
-
-    border: 1px solid #202020;
-}
-
-.stats small {
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: #666;
-
-    font-size: 9px;
-
-    letter-spacing: 1px;
-}
-
-.stats strong {
-    font-size: 16px;
-}
-
-
-/* =====================================================
-   STATUS COLORS
-===================================================== */
-
-.green {
-    color: var(--green) !important;
-}
-
-.orange {
-    color: var(--orange) !important;
-}
-
-.red {
-    color: var(--red) !important;
-}
-
-
-/* =====================================================
-   P&L GRAPH
-===================================================== */
-
-.graph-box {
-    max-width: 1100px;
-
-    height: 500px;
-
-    margin: auto;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(156, 255, 0, .05),
-            transparent
-        );
-
-    border: 1px solid #222;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-}
-
-.graph-placeholder {
-    text-align: center;
-
-    color: #777;
-}
-
-.graph-icon {
-    margin-bottom: 20px;
-
-    font-size: 65px;
-}
-
-.graph-placeholder h2 {
-    margin-bottom: 10px;
-
-    color: #fff;
-
-    letter-spacing: 3px;
-}
-
-.graph-line {
-    margin-top: 35px;
-
-    color: var(--green);
-
-    letter-spacing: 3px;
-}
-
-
-/* =====================================================
-   MANAGEMENT
-===================================================== */
-
-.management-grid {
-    max-width: 1100px;
+.team-grid {
+    max-width: 1200px;
 
     margin: auto;
 
@@ -876,102 +362,168 @@ input {
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 20px;
+    gap: 25px;
 }
 
-.person-card {
-    padding: 40px 25px;
+.team-card {
+    position: relative;
 
+    padding: 35px 25px;
+
+    background: #0b0b0b;
+
+    border: 1px solid #1b1b1b;
+
+    text-align: center;
+
+    transition: 0.4s;
+
+    overflow: hidden;
+}
+
+.team-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 2px;
+
+    background: #39ff14;
+
+    transition: 0.4s;
+}
+
+.team-card:hover::before {
+    left: 0;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #39ff14;
+
+    box-shadow: 0 10px 40px rgba(57, 255, 20, 0.08);
+}
+
+.team-logo {
+    width: 90px;
+    height: 90px;
+
+    margin: auto auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #39ff14;
+
+    border-radius: 50%;
+
+    color: #39ff14;
+
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.team-card h3 {
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+.team-card p {
+    color: #888;
+}
+
+/* ================================
+   ROSTER / PLAYERS
+   ================================ */
+
+.roster {
     background: #080808;
-
-    border: 1px solid #222;
-
-    transition:
-        border-color .3s ease,
-        transform .3s ease;
 }
 
-.person-card:hover {
-    border-color: var(--green);
-
-    transform: translateY(-5px);
-}
-
-.person-card span {
-    color: var(--green);
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-}
-
-.person-card h2 {
-    margin: 20px 0 10px;
-
-    font-size: 20px;
-}
-
-.person-card p {
-    color: #777;
-}
-
-
-/* =====================================================
-   LINEUPS
-===================================================== */
-
-.lineup-grid {
-    max-width: 1100px;
+.player-grid {
+    max-width: 1200px;
 
     margin: auto;
 
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 20px;
 }
 
-.lineup-card {
-    padding: 35px;
+.player-card {
+    background: #0c0c0c;
 
-    background: #080808;
+    border: 1px solid #1c1c1c;
 
-    border: 1px solid #222;
+    overflow: hidden;
 
-    transition:
-        border-color .3s ease,
-        transform .3s ease;
+    transition: 0.3s;
 }
 
-.lineup-card:hover {
-    border-color: var(--green);
+.player-card:hover {
+    border-color: #39ff14;
 
-    transform: translateY(-4px);
+    transform: translateY(-6px);
 }
 
-.lineup-card span {
-    color: #666;
+.player-image {
+    height: 260px;
 
-    font-size: 11px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(57,255,20,0.15),
+            rgba(0,0,0,0.9)
+        );
 
-    letter-spacing: 3px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #39ff14;
+
+    font-size: 50px;
+    font-weight: 900;
 }
 
-.lineup-card h2 {
-    margin: 15px 0;
-
-    font-size: 23px;
+.player-info {
+    padding: 20px;
 }
 
-.coming-soon {
-    opacity: .6;
+.player-info h3 {
+    font-size: 20px;
 }
 
+.player-info span {
+    display: block;
 
-/* =====================================================
+    margin-top: 5px;
+
+    color: #39ff14;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+}
+
+/* ================================
    ACHIEVEMENTS
-===================================================== */
+   ================================ */
+
+.achievements {
+    background: #050505;
+}
 
 .achievement-grid {
     max-width: 1100px;
@@ -982,397 +534,390 @@ input {
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 20px;
+    gap: 25px;
 }
 
 .achievement-card {
     padding: 35px;
 
-    background: #080808;
+    background: #0b0b0b;
 
-    border: 1px solid #222;
+    border-left: 3px solid #39ff14;
+
+    transition: 0.3s;
 }
 
-.achievement-card strong {
-    color: var(--green);
+.achievement-card:hover {
+    transform: translateX(5px);
 
-    font-size: 35px;
+    background: #101010;
 }
 
-.achievement-card h2 {
-    margin: 25px 0 10px;
+.achievement-card h3 {
+    color: #39ff14;
+
+    margin-bottom: 10px;
 }
 
 .achievement-card p {
-    color: #777;
+    color: #999;
 }
 
+/* ================================
+   NEWS / UPDATES
+   ================================ */
 
-/* =====================================================
-   TOURNAMENT HISTORY
-===================================================== */
-
-.timeline {
-    max-width: 850px;
-
-    margin: auto;
-
-    padding-left: 40px;
-
-    border-left: 1px solid var(--green);
-}
-
-.timeline-item {
-    position: relative;
-
-    margin-bottom: 50px;
-}
-
-.timeline-item::before {
-    content: "";
-
-    position: absolute;
-
-    top: 5px;
-    left: -47px;
-
-    width: 13px;
-    height: 13px;
-
-    background: var(--green);
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 15px var(--green);
-}
-
-.timeline-item span {
-    color: var(--green);
-
-    letter-spacing: 3px;
-}
-
-.timeline-item h2 {
-    margin: 12px 0;
-}
-
-.timeline-item p {
-    color: #777;
-}
-
-
-/* =====================================================
-   ABOUT
-===================================================== */
-
-.about-box {
-    max-width: 1000px;
-
-    margin: auto;
-
-    padding: 55px;
-
+.news {
     background: #080808;
-
-    border: 1px solid #222;
-
-    color: #aaa;
-
-    font-size: 16px;
-
-    line-height: 2;
 }
 
-.about-box strong {
-    color: var(--green);
+.news-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
 }
 
-.about-tag {
-    margin-top: 35px;
+.news-card {
+    background: #0c0c0c;
 
-    color: var(--green);
+    border: 1px solid #1c1c1c;
 
-    font-weight: bold;
+    padding: 25px;
 
-    letter-spacing: 4px;
+    transition: 0.3s;
 }
 
+.news-card:hover {
+    border-color: #39ff14;
 
-/* =====================================================
-   JOIN US
-===================================================== */
+    transform: translateY(-5px);
+}
 
-.join-content {
-    max-width: 800px;
+.news-date {
+    color: #39ff14;
 
-    margin: 15vh auto;
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.news-card h3 {
+    margin-bottom: 12px;
+}
+
+.news-card p {
+    color: #888;
+
+    line-height: 1.6;
+}
+
+/* ================================
+   CONTACT
+   ================================ */
+
+.contact {
+    background: #050505;
+}
+
+.contact-container {
+    max-width: 900px;
+
+    margin: auto;
 
     text-align: center;
 }
 
-.join-content h1 {
-    margin-bottom: 20px;
+.contact-container p {
+    color: #999;
 
-    font-size: clamp(40px, 7vw, 80px);
+    margin-bottom: 30px;
 }
 
-.join-content > p {
-    color: #777;
-
-    line-height: 1.8;
-}
-
-.social-buttons {
+.social-links {
     display: flex;
 
     justify-content: center;
 
     gap: 15px;
 
-    margin-top: 40px;
+    flex-wrap: wrap;
 }
 
-.social-btn {
-    padding: 16px 30px;
+.social-links a {
+    width: 50px;
+    height: 50px;
 
-    border: 1px solid var(--green);
+    display: flex;
 
-    color: var(--green);
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #333;
+
+    color: white;
 
     text-decoration: none;
 
-    transition:
-        background .3s ease,
-        color .3s ease,
-        box-shadow .3s ease;
+    transition: 0.3s;
 }
 
-.social-btn:hover {
-    background: var(--green);
+.social-links a:hover {
+    border-color: #39ff14;
 
-    color: #000;
+    color: #39ff14;
 
-    box-shadow:
-        0 0 25px rgba(156, 255, 0, .3);
+    transform: translateY(-4px);
 }
 
+/* ================================
+   FOOTER
+   ================================ */
 
-/* =====================================================
+footer {
+    padding: 30px 7%;
+
+    background: #020202;
+
+    border-top: 1px solid #151515;
+
+    text-align: center;
+}
+
+footer p {
+    color: #666;
+
+    font-size: 13px;
+}
+
+footer span {
+    color: #39ff14;
+}
+
+/* ================================
+   PAGE / MENU ANIMATION
+   ================================ */
+
+.fade-in {
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition: 0.8s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* ================================
+   GLOW EFFECT
+   ================================ */
+
+.glow {
+    text-shadow:
+        0 0 5px #39ff14,
+        0 0 15px rgba(57, 255, 20, 0.5);
+}
+
+/* ================================
    ANIMATIONS
-===================================================== */
+   ================================ */
 
-@keyframes logoZoom {
+@keyframes rotateCircle {
 
-    0% {
-        opacity: 0;
-
-        transform: scale(1.5);
-
-        filter: brightness(0);
+    from {
+        transform: rotate(0deg);
     }
 
-    60% {
-        opacity: 1;
+    to {
+        transform: rotate(360deg);
+    }
+}
 
-        filter: brightness(1.5);
+@keyframes pulse {
+
+    0% {
+        box-shadow: 0 0 0 rgba(57, 255, 20, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
     }
 
     100% {
-        opacity: 1;
-
-        transform: scale(1);
-
-        filter: brightness(1);
+        box-shadow: 0 0 0 rgba(57, 255, 20, 0);
     }
 }
 
+/* ================================
+   RESPONSIVE - TABLET
+   ================================ */
 
-@keyframes buttonIn {
+@media (max-width: 900px) {
 
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-50%)
-            translateY(20px);
+    .navbar {
+        padding: 0 5%;
     }
 
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-}
-
-
-@keyframes nextText {
-
-    from {
-        opacity: 0;
-
-        transform: scale(.8);
-
-        letter-spacing: 20px;
-    }
-
-    to {
-        opacity: 1;
-
-        transform: scale(1);
-
-        letter-spacing: 7px;
-    }
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 750px) {
-
-    .page-content {
-        width: 90%;
-
-        padding: 50px 0;
-    }
-
-    .next-btn {
-        bottom: 30px;
-
-        min-width: 140px;
-
-        padding: 12px 30px;
-
-        font-size: 12px;
-
-        letter-spacing: 4px;
-    }
-
-    .menu-grid {
-        grid-template-columns: 1fr;
-
-        gap: 12px;
-
-        margin-top: 35px;
-    }
-
-    .menu-card {
-        min-height: 100px;
-    }
-
-    .earnings-grid {
-        grid-template-columns: 1fr;
-
+    .nav-links {
         gap: 20px;
     }
 
-    .earning-card {
-        height: 430px;
+    .about-container {
+        grid-template-columns: 1fr;
     }
 
-    .card-front,
-    .card-back {
-        height: 430px;
-
-        min-height: 430px;
-
-        padding: 25px;
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .big-letter {
-        font-size: 90px;
+    .player-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .org-symbol {
-        font-size: 65px;
+    .achievement-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ================================
+   RESPONSIVE - MOBILE
+   ================================ */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+
+        top: 65px;
+        left: 0;
+
+        width: 100%;
+
+        background: #050505;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        max-height: 0;
+
+        overflow: hidden;
+
+        transition: 0.4s;
+
+        border-bottom: 1px solid transparent;
+    }
+
+    .nav-links.active {
+        max-height: 500px;
+
+        border-color: #1c1c1c;
+    }
+
+    .nav-links li {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+
+        padding: 16px;
+    }
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero {
+        padding-top: 100px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+
+        letter-spacing: 2px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    .team-grid,
+    .player-grid,
+    .achievement-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
     }
 
     .stats {
         grid-template-columns: 1fr 1fr;
-
-        gap: 8px;
     }
 
-    .stats div {
-        padding: 10px;
+    .stat-box {
+        padding: 20px 10px;
     }
 
-    .stats strong {
-        font-size: 14px;
+    .stat-box h3 {
+        font-size: 28px;
     }
 
-    .management-grid,
-    .achievement-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .lineup-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .graph-box {
-        height: 400px;
-    }
-
-    .about-box {
-        padding: 30px 20px;
-
-        font-size: 14px;
-    }
-
-    .social-buttons {
+    .hero-buttons {
         flex-direction: column;
+
+        align-items: center;
     }
 
-    .back-btn {
-        top: 15px;
-
-        left: 15px;
-
-        padding: 9px 15px;
-    }
-
-    .inner-page {
-        padding: 75px 20px 40px;
+    .btn {
+        width: 220px;
     }
 }
 
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
+/* ================================
+   SMALL MOBILE
+   ================================ */
 
 @media (max-width: 400px) {
 
-    .main-logo {
-        width: 75vw;
+    .hero h1 {
+        font-size: 40px;
     }
 
-    .next-btn {
-        bottom: 25px;
-
-        padding: 11px 25px;
+    .stats {
+        grid-template-columns: 1fr;
     }
 
-    .card-front,
-    .card-back {
-        padding: 20px;
-    }
-
-    .card-front h2,
-    .card-back h2 {
-        font-size: 16px;
-    }
-
-    .stats small {
-        font-size: 8px;
-    }
-
-    .stats strong {
-        font-size: 13px;
+    .player-image {
+        height: 220px;
     }
 }
