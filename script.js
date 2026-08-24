@@ -272,7 +272,7 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 4,210,
+    amountOfSlots: 4210,
 
     totalEarning: 4985,
 
