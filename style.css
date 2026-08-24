@@ -3445,3 +3445,313 @@ a:focus-visible {
     }
 
 }
+/* =====================================================
+   JOIN US - SOCIAL BUTTONS
+===================================================== */
+
+.join-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.join-content > p:not(.section-number) {
+    max-width: 650px;
+    margin: 20px auto 40px;
+    color: #888;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   SOCIAL BUTTON GRID
+===================================================== */
+
+.social-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =====================================================
+   SOCIAL BUTTON
+===================================================== */
+
+.social-btn {
+
+    position: relative;
+
+    min-height: 110px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    text-decoration: none;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111,
+            #070707
+        );
+
+    border: 1px solid #202020;
+
+    transition: 0.35s;
+
+    overflow: hidden;
+
+}
+
+
+.social-btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #39ff14;
+
+    box-shadow:
+        0 0 15px
+        rgba(57,255,20,0.5);
+
+}
+
+
+.social-btn:hover {
+
+    transform: translateY(-7px);
+
+    border-color: #39ff14;
+
+    box-shadow:
+        0 12px 35px
+        rgba(57,255,20,0.12);
+
+}
+
+
+.social-btn .social-icon {
+
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #39ff14;
+
+    color: #39ff14;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+}
+
+
+.social-btn span:nth-child(2) {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-weight: 800;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.social-btn small {
+
+    color: #666;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.social-btn b {
+
+    margin-left: auto;
+
+    color: #555;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+
+}
+
+
+.social-btn:hover b {
+
+    color: #39ff14;
+
+    transform: translate(3px, -3px);
+
+}
+
+
+/* =====================================================
+   OFFICIAL EMAIL
+===================================================== */
+
+.official-email {
+
+    margin: 35px auto 0;
+
+    padding: 20px 25px;
+
+    max-width: 600px;
+
+    background: #0a0a0a;
+
+    border: 1px solid #1c1c1c;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.official-email span {
+
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.official-email strong {
+
+    color: #39ff14;
+
+    font-size: 13px;
+
+    word-break: break-all;
+
+}
+
+
+/* =====================================================
+   JOIN TAG
+===================================================== */
+
+.join-tag {
+
+    margin-top: 35px;
+
+    color: #39ff14;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 15px
+        rgba(57,255,20,0.3);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .social-buttons {
+
+        grid-template-columns: 1fr;
+
+        max-width: 500px;
+
+    }
+
+
+    .social-btn {
+
+        min-height: 90px;
+
+    }
+
+
+    .official-email {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 10px;
+
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .social-btn {
+
+        padding: 18px;
+
+    }
+
+
+    .social-btn .social-icon {
+
+        width: 40px;
+        height: 40px;
+
+    }
+
+}
