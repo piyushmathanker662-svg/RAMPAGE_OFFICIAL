@@ -3755,3 +3755,409 @@ a:focus-visible {
     }
 
 }
+
+/* =====================================================
+   WEEKEND MVP
+===================================================== */
+
+.mvp-grid {
+
+    max-width: 1100px;
+
+    margin: 40px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   MVP CARD
+===================================================== */
+
+.mvp-card {
+
+    position: relative;
+
+    min-height: 430px;
+
+    perspective: 1200px;
+
+}
+
+
+/* =====================================================
+   FRONT + BACK
+===================================================== */
+
+.mvp-card-front,
+.mvp-card-back {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111111,
+            #060606
+        );
+
+    border: 1px solid #202020;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+
+    transition:
+        transform 0.7s
+        cubic-bezier(
+            0.4,
+            0.2,
+            0.2,
+            1
+        );
+
+}
+
+
+/* =====================================================
+   FRONT
+===================================================== */
+
+.mvp-card-front {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+}
+
+
+.mvp-card-front::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #39ff14;
+
+    box-shadow:
+        0 0 20px
+        rgba(57,255,20,0.5);
+
+}
+
+
+.mvp-card-front::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    border: 1px solid
+        rgba(57,255,20,0.08);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   MVP NUMBER
+===================================================== */
+
+.mvp-number {
+
+    position: absolute;
+
+    top: 20px;
+    left: 22px;
+
+    color: #555;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =====================================================
+   MVP TROPHY
+===================================================== */
+
+.mvp-trophy {
+
+    font-size: 55px;
+
+    margin-bottom: 20px;
+
+    z-index: 2;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(57,255,20,0.35)
+        );
+
+}
+
+
+/* =====================================================
+   MVP TITLE
+===================================================== */
+
+.mvp-card h2 {
+
+    font-size: 22px;
+
+    line-height: 1.3;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+
+    z-index: 2;
+
+}
+
+
+.mvp-card h2 span {
+
+    display: block;
+
+    color: #39ff14;
+
+}
+
+
+/* =====================================================
+   MVP DATE
+===================================================== */
+
+.mvp-date {
+
+    color: #777;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+
+    z-index: 2;
+
+}
+
+
+/* =====================================================
+   VIEW BUTTON
+===================================================== */
+
+.mvp-view-btn {
+
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    border: 1px solid #39ff14;
+
+    background: transparent;
+
+    color: #39ff14;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    z-index: 5;
+
+}
+
+
+.mvp-view-btn:hover {
+
+    background: #39ff14;
+
+    color: #000;
+
+    box-shadow:
+        0 0 25px
+        rgba(57,255,20,0.3);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.mvp-card-back {
+
+    transform:
+        rotateY(180deg);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   FLIPPED
+===================================================== */
+
+.mvp-card.flipped
+.mvp-card-front {
+
+    transform:
+        rotateY(-180deg);
+
+}
+
+
+.mvp-card.flipped
+.mvp-card-back {
+
+    transform:
+        rotateY(0deg);
+
+}
+
+
+/* =====================================================
+   POSTER
+===================================================== */
+
+.mvp-poster {
+
+    width: 100%;
+
+    height: 310px;
+
+    object-fit: contain;
+
+    background: #000;
+
+    border: 1px solid #1c1c1c;
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.mvp-back-btn {
+
+    margin-top: 15px;
+
+    padding: 10px 22px;
+
+    background: transparent;
+
+    border: 1px solid #333;
+
+    color: #888;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.mvp-back-btn:hover {
+
+    color: #39ff14;
+
+    border-color: #39ff14;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .mvp-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .mvp-grid {
+
+        grid-template-columns: 1fr;
+
+        max-width: 450px;
+
+    }
+
+
+    .mvp-card {
+
+        min-height: 450px;
+
+    }
+
+}
