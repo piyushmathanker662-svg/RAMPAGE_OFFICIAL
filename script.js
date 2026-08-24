@@ -1032,6 +1032,11 @@ const weekendMVPData = [
         poster: "./mvp-aug-w04.png"
     }
 
+   {
+        week: "AUGUST WEEK 05",
+        poster: "./mvp-aug-w04.png"
+    }
+
 ];
 
 
