@@ -1019,3 +1019,136 @@ console.log(`
         THE NEXT PAGE IS RAMPAGE
 ========================================
 `);
+
+/* =====================================================
+   WEEKEND MVP DATA
+   ADD NEW MVP HERE IN FUTURE
+===================================================== */
+
+const weekendMVPData = [
+
+    {
+        week: "AUGUST WEEK 04",
+        poster: "mvp-aug-w04.jpg"
+    }
+
+];
+
+
+/* =====================================================
+   CREATE MVP CARDS
+===================================================== */
+
+function createMVPCards() {
+
+    const grid =
+        document.getElementById("mvpGrid");
+
+    if (!grid) {
+        return;
+    }
+
+    grid.innerHTML = "";
+
+
+    weekendMVPData.forEach(function(mvp, index) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "mvp-card";
+
+
+        card.innerHTML = `
+
+            <!-- FRONT -->
+
+            <div class="mvp-card-front">
+
+                <div class="mvp-number">
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <div class="mvp-trophy">
+                    🏆
+                </div>
+
+                <div class="mvp-date">
+                    RAMPAGE WEEKEND MVP
+                </div>
+
+                <h2>
+                    ${mvp.week}
+                    <span>MVP</span>
+                </h2>
+
+                <button
+                    class="mvp-view-btn"
+                    onclick="flipMVPCard(this)"
+                >
+                    VIEW MVP ↻
+                </button>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div class="mvp-card-back">
+
+                <img
+                    src="${mvp.poster}"
+                    class="mvp-poster"
+                    alt="${mvp.week} MVP Poster"
+                >
+
+                <button
+                    class="mvp-back-btn"
+                    onclick="flipMVPCard(this)"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   FLIP MVP CARD
+===================================================== */
+
+function flipMVPCard(button) {
+
+    const card =
+        button.closest(".mvp-card");
+
+    if (!card) {
+        return;
+    }
+
+    card.classList.toggle("flipped");
+
+}
+
+
+/* =====================================================
+   INITIALIZE MVP
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        createMVPCards();
+
+    }
+);
