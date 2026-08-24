@@ -139,8 +139,8 @@ function goHome() {
     PASSWORD : 1234
 */
 
-const earningsID = "RAMPAGE";
-const earningsPassword = "1234";
+const earningsID = "RAMPAGE/OFFICER";
+const earningsPassword = "Rampage@domain";
 
 
 function loginEarnings() {
