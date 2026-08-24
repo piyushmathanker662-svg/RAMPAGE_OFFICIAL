@@ -135,8 +135,8 @@ function goHome() {
 /*
     LOGIN DETAILS
 
-    ID       : RAMPAGE
-    PASSWORD : 1234
+    ID       : RAMPAGE/OFFICER
+    PASSWORD : Rampage@domain
 */
 
 const earningsID = "RAMPAGE/OFFICER";
@@ -272,11 +272,11 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 4045,
+    amountOfSlots: 4,210,
 
     totalEarning: 4985,
 
-    profitLoss: 1100
+    profitLoss: 935
 
 };
 
