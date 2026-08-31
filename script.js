@@ -272,11 +272,11 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 4210,
+    amountOfSlots: 4590,
 
-    totalEarning: 4985,
+    totalEarning: 5435,
 
-    profitLoss: 935
+    profitLoss: 927
 
 };
 
@@ -1029,13 +1029,8 @@ const weekendMVPData = [
 
     {
         week: "AUGUST WEEK 04",
-        poster: "./mvp-aug-w04.png"
+        poster: "./mvp-aug-w04.jpeg"
     },
-
-   {
-        week: "AUGUST WEEK 05",
-        poster: "./mvp-aug-w04.png"
-    }
 
 ];
 
