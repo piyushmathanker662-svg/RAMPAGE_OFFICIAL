@@ -356,22 +356,22 @@ const pnlData = [
 
     {
         month: "May 2026",
-        value: 743
+        value: 245
     },
 
     {
         month: "June 2026",
-        value: 315
+        value: 743
     },
 
     {
         month: "July 2026",
-        value: 427
+        value: -315
     },
 
     {
         month: "August 2026",
-        value: 0
+        value: 366
     }
 
 ];
