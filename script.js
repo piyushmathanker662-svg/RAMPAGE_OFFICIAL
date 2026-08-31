@@ -651,9 +651,18 @@ function createPNLGraph() {
     });
 
 
-    /* =================================================
-       CONNECT POINTS
-    ================================================= */
+  /* ---------------------------------------------
+   CONNECTING LINES
+--------------------------------------------- */
+
+setTimeout(function () {
+
+    const chartWidth =
+        chartArea.clientWidth;
+
+    const chartHeight =
+        chartArea.clientHeight;
+
 
     for (
         let i = 0;
@@ -668,33 +677,40 @@ function createPNLGraph() {
             pnlData[i + 1];
 
 
+        /* X POSITION */
+
         const currentX =
-            (i /
-            (pnlData.length - 1)) *
-            90 + 5;
+            ((i /
+            Math.max(pnlData.length - 1, 1)) *
+            90 + 5) / 100 *
+            chartWidth;
 
 
         const nextX =
-            ((i + 1) /
-            (pnlData.length - 1)) *
-            90 + 5;
+            (((i + 1) /
+            Math.max(pnlData.length - 1, 1)) *
+            90 + 5) / 100 *
+            chartWidth;
 
+
+        /* Y POSITION */
 
         const currentY =
             ((maxValue - current.value) /
             (maxValue - minValue)) *
-            100;
+            chartHeight;
 
 
         const nextY =
             ((maxValue - next.value) /
             (maxValue - minValue)) *
-            100;
+            chartHeight;
 
+
+        /* DISTANCE */
 
         const dx =
             nextX - currentX;
-
 
         const dy =
             nextY - currentY;
@@ -702,14 +718,19 @@ function createPNLGraph() {
 
         const distance =
             Math.sqrt(
-                dx * dx + dy * dy
+                dx * dx +
+                dy * dy
             );
 
+
+        /* ANGLE */
 
         const angle =
             Math.atan2(dy, dx) *
             180 / Math.PI;
 
+
+        /* LINE */
 
         const line =
             document.createElement("div");
@@ -720,27 +741,28 @@ function createPNLGraph() {
 
 
         line.style.width =
-            distance + "%";
+            distance + "px";
 
 
         line.style.left =
-            currentX + "%";
+            currentX + "px";
 
 
         line.style.top =
-            currentY + "%";
+            currentY + "px";
 
 
         line.style.transform =
-            `rotate(${angle}deg)`;
+            "rotate(" +
+            angle +
+            "deg)";
 
 
-        chartArea.insertBefore(
-            line,
-            chartArea.firstChild
-        );
+        chartArea.appendChild(line);
 
     }
+
+}, 50);
 
 
     /* =================================================
