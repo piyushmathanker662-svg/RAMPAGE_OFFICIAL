@@ -4243,8 +4243,10 @@ a:focus-visible {
 
 .pnl-y-label {
     position: absolute;
-    left: -60px;
+    left: -42px;
     transform: translateY(-50%);
+    width: 35px;
+    text-align: right;
     font-size: 11px;
     font-weight: bold;
     color: #aaa;
