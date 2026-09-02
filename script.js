@@ -272,11 +272,11 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 2900,
+    amountOfSlots: 2950,
 
-    totalEarning: 5685,
+    totalEarning: 6235,
 
-    profitLoss: 1039
+    profitLoss: 1265
 
 };
 
@@ -372,6 +372,11 @@ const pnlData = [
     {
         month: "August 2026",
         value: 366
+    },
+
+   {
+        month: "September 2026",
+        value: 226
     }
 
 ];
