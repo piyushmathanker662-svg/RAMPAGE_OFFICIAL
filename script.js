@@ -11,7 +11,7 @@
 const intro = document.getElementById("intro");
 const nextPage = document.getElementById("nextPage");
 const mainMenu = document.getElementById("mainMenu");
-const nextBtn = document.getElementById("nextBtn");
+// const nextBtn = document.getElementById("nextBtn");
 
 
 /* =====================================================
