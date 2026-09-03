@@ -9,9 +9,9 @@
 ===================================================== */
 
 const intro = document.getElementById("intro");
-// const nextPage = document.getElementById("nextPage");
-// const mainMenu = document.getElementById("mainMenu");
-// const nextBtn = document.getElementById("nextBtn");
+const nextPage = document.getElementById("nextPage");
+const mainMenu = document.getElementById("mainMenu");
+const nextBtn = document.getElementById("nextBtn");
 
 
 /* =====================================================
@@ -19,21 +19,21 @@ const intro = document.getElementById("intro");
    INTRO → TAGLINE → MAIN MENU
 ===================================================== */
 
-if (nextBtn) {
+// if (nextBtn) {
 
-    nextBtn.addEventListener("click", () => {
+//     nextBtn.addEventListener("click", () => {
 
-        nextBtn.disabled = true;
+//         nextBtn.disabled = true;
 
-        // Hide intro
-        intro.classList.add("hide");
+//         // Hide intro
+//         intro.classList.add("hide");
 
-        // Show tagline page
-        setTimeout(() => {
+//         // Show tagline page
+//         setTimeout(() => {
 
-            nextPage.classList.add("show");
+//             nextPage.classList.add("show");
 
-        }, 700);
+//         }, 700);
 
 
         // Hide tagline
