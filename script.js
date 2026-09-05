@@ -62,17 +62,17 @@ if (nextBtn) {
 
 function openPage(pageId) {
 
-    // Hide every page
+    // Hide all pages
     document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
     });
 
-
     // Hide main menu
-    mainMenu.classList.remove("active");
+    if (mainMenu) {
+        mainMenu.classList.remove("active");
+    }
 
-
-    // Selected page
+    // Find selected page
     const selectedPage = document.getElementById(pageId);
 
     if (!selectedPage) {
@@ -80,8 +80,7 @@ function openPage(pageId) {
         return;
     }
 
-
-    // Show selected page
+    // Open selected page
     setTimeout(() => {
 
         selectedPage.classList.add("active");
@@ -93,8 +92,8 @@ function openPage(pageId) {
 
     }, 100);
 
+}
 
-  
 
 /* =====================================================
    GO BACK TO MAIN MENU
@@ -266,14 +265,22 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        updateOrganisationCard();
+        // Organisation
+        if (typeof updateOrganisationCard === "function") {
+            updateOrganisationCard();
+        }
 
-        updateMonthlyCards();
+        // Monthly cards
+        if (typeof updateMonthlyCards === "function") {
+            updateMonthlyCards();
+        }
 
-        updatePNLSummary();
+        // P&L removed — no P&L functions needed
 
-        createPNLGraph();
-
+        // Weekend MVP
+        if (typeof createMVPCards === "function") {
+            createMVPCards();
+        }
 
         console.log(
             "RAMPAGE OFFICIAL WEBSITE LOADED."
