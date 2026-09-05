@@ -19,21 +19,21 @@ const nextBtn = document.getElementById("nextBtn");
    INTRO → TAGLINE → MAIN MENU
 ===================================================== */
 
-// if (nextBtn) {
+if (nextBtn) {
 
-//     nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", () => {
 
-//         nextBtn.disabled = true;
+        nextBtn.disabled = true;
 
-//         // Hide intro
-//         intro.classList.add("hide");
+        // Hide intro
+        intro.classList.add("hide");
 
-//         // Show tagline page
-//         setTimeout(() => {
+        // Show tagline page
+        setTimeout(() => {
 
-//             nextPage.classList.add("show");
+            nextPage.classList.add("show");
 
-//         }, 700);
+        }, 700);
 
 
         // Hide tagline
@@ -135,12 +135,12 @@ function goHome() {
 /*
     LOGIN DETAILS
 
-    ID       : RAMPAGE/OFFICER
-    PASSWORD : Rampage@domain
+    ID       : RAMPAGE
+    PASSWORD : rg@2304
 */
 
-const earningsID = "RAMPAGE/OFFICER";
-const earningsPassword = "Rampage@domain";
+const earningsID = "RAMPAGE";
+const earningsPassword = "rg@2304";
 
 
 function loginEarnings() {
@@ -272,11 +272,13 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 2950,
+    amountOfSlots: 3981,
 
-    totalEarning: 6235,
+    totalEarning: 6295,
 
-    profitLoss: 1265
+    salaryExpense: 2235,
+
+    profitLoss: 2080
 
 };
 
@@ -321,7 +323,7 @@ function updateOrganisationCard() {
             card.querySelectorAll(".stats strong");
 
 
-        if (stats.length >= 3) {
+        if (stats.length >= 4) {
 
             stats[0].textContent =
                 organisationData.amountOfSlots
@@ -333,8 +335,13 @@ function updateOrganisationCard() {
                     organisationData.totalEarning
                 );
 
-
             stats[2].textContent =
+                formatMoney(
+                    organisationData.salaryExpense
+                );
+
+
+            stats[3].textContent =
                 (organisationData.profitLoss >= 0 ? "+" : "") +
                 formatMoney(
                     organisationData.profitLoss
@@ -356,27 +363,27 @@ const pnlData = [
 
     {
         month: "May 2026",
-        value: 245
+        value: 385
     },
 
     {
         month: "June 2026",
-        value: 743
+        value: 673
     },
 
     {
         month: "July 2026",
-        value: -315
+        value: 10
     },
 
     {
         month: "August 2026",
-        value: 366
+        value: 521
     },
 
    {
         month: "September 2026",
-        value: 226
+        value: 491
     }
 
 ];
