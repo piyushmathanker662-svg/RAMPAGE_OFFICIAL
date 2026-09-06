@@ -62,17 +62,17 @@ if (nextBtn) {
 
 function openPage(pageId) {
 
-    // Hide all pages
+    // Hide every page
     document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
     });
 
-    // Hide main menu
-    if (mainMenu) {
-        mainMenu.classList.remove("active");
-    }
 
-    // Find selected page
+    // Hide main menu
+    mainMenu.classList.remove("active");
+
+
+    // Selected page
     const selectedPage = document.getElementById(pageId);
 
     if (!selectedPage) {
@@ -80,7 +80,8 @@ function openPage(pageId) {
         return;
     }
 
-    // Open selected page
+
+    // Show selected page
     setTimeout(() => {
 
         selectedPage.classList.add("active");
@@ -91,6 +92,16 @@ function openPage(pageId) {
         });
 
     }, 100);
+
+
+    // Create P&L graph whenever P&L page opens
+    if (pageId === "pnlPage") {
+
+        setTimeout(() => {
+            createPNLGraph();
+        }, 200);
+
+    }
 
 }
 
@@ -253,8 +264,722 @@ function flipLineupCard(button) {
 
 }
 
+/* =====================================================
+   EARNINGS DATA
+===================================================== */
+
+const organisationData = {
+
+    name: "RAMPAGE ESPORTS ACCOUNT",
+
+    amountOfSlots: 3981,
+
+    totalEarning: 6295,
+
+    salaryExpense: 2235,
+
+    profitLoss: 2080
+
+};
 
 
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
+
+function formatMoney(amount) {
+
+    const sign =
+        amount < 0 ? "-" : "";
+
+
+    const formatted =
+        Math.abs(amount).toLocaleString("en-IN");
+
+
+    return sign + "₹" + formatted;
+
+}
+
+
+/* =====================================================
+   UPDATE ORGANISATION CARD
+===================================================== */
+
+function updateOrganisationCard() {
+
+    const cards =
+        document.querySelectorAll(".organisation-card");
+
+
+    if (!cards.length) {
+        return;
+    }
+
+
+    cards.forEach(card => {
+
+        const stats =
+            card.querySelectorAll(".stats strong");
+
+
+        if (stats.length >= 4) {
+
+            stats[0].textContent =
+                organisationData.amountOfSlots
+                .toLocaleString("en-IN");
+
+
+            stats[1].textContent =
+                formatMoney(
+                    organisationData.totalEarning
+                );
+
+            stats[2].textContent =
+                formatMoney(
+                    organisationData.salaryExpense
+                );
+
+
+            stats[3].textContent =
+                (organisationData.profitLoss >= 0 ? "+" : "") +
+                formatMoney(
+                    organisationData.profitLoss
+                );
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   P&L DATA
+   CHANGE ONLY VALUES HERE
+===================================================== */
+
+const pnlData = [
+
+    {
+        month: "May 2026",
+        value: 385
+    },
+
+    {
+        month: "June 2026",
+        value: 673
+    },
+
+    {
+        month: "July 2026",
+        value: 10
+    },
+
+    {
+        month: "August 2026",
+        value: 521
+    },
+
+   {
+        month: "September 2026",
+        value: 491
+    }
+
+];
+
+
+/* =====================================================
+   CALCULATE TOTAL P&L
+===================================================== */
+
+function calculatePNLTotal() {
+
+    return pnlData.reduce(
+        (total, item) => {
+
+            return total + item.value;
+
+        },
+        0
+    );
+
+}
+
+
+/* =====================================================
+   CREATE P&L GRAPH
+===================================================== */
+
+function createPNLGraph() {
+
+    const graphBox =
+        document.querySelector(".graph-box");
+
+
+    if (!graphBox) {
+        return;
+    }
+
+
+    // Clear old graph
+    graphBox.innerHTML = "";
+
+
+    /* =================================================
+       GRAPH WRAPPER
+    ================================================= */
+
+    const graph =
+        document.createElement("div");
+
+    graph.className =
+        "pnl-chart";
+
+
+    /* =================================================
+       GRAPH TITLE
+    ================================================= */
+
+    const title =
+        document.createElement("div");
+
+    title.className =
+        "pnl-chart-title";
+
+    title.textContent =
+        "RAMPAGE FINANCIAL PERFORMANCE";
+
+
+    graph.appendChild(title);
+
+
+    /* =================================================
+       GRAPH AREA
+    ================================================= */
+
+    const chartArea =
+        document.createElement("div");
+
+    chartArea.className =
+        "pnl-chart-area";
+
+
+    /* =================================================
+       VALUES
+    ================================================= */
+
+    const values =
+        pnlData.map(item => item.value);
+
+
+    let maxValue =
+        Math.max(...values, 0);
+
+
+    let minValue =
+        Math.min(...values, 0);
+
+
+    // Graph padding
+    const range =
+        Math.max(
+            Math.abs(maxValue),
+            Math.abs(minValue),
+            100
+        );
+
+
+    maxValue =
+        range * 1.25;
+
+
+    minValue =
+        -range * 1.25;
+
+
+    /* =================================================
+       ZERO LINE
+    ================================================= */
+
+    const zeroPercent =
+        ((maxValue) /
+        (maxValue - minValue)) * 100;
+
+
+    const zeroLine =
+        document.createElement("div");
+
+    zeroLine.className =
+        "pnl-zero-line";
+
+
+    zeroLine.style.top =
+        zeroPercent + "%";
+
+
+    chartArea.appendChild(zeroLine);
+
+
+    /* =================================================
+       Y AXIS LABELS
+    ================================================= */
+
+    const maxLabel =
+        document.createElement("div");
+
+    maxLabel.className =
+        "pnl-y-label pnl-max";
+
+    maxLabel.textContent =
+        "+" + Math.round(maxValue);
+
+
+    const zeroLabel =
+        document.createElement("div");
+
+    zeroLabel.className =
+        "pnl-y-label pnl-zero";
+
+    zeroLabel.textContent =
+        "₹0";
+
+
+    const minLabel =
+        document.createElement("div");
+
+    minLabel.className =
+        "pnl-y-label pnl-min";
+
+    minLabel.textContent =
+        Math.round(minValue);
+
+
+    chartArea.appendChild(maxLabel);
+    chartArea.appendChild(zeroLabel);
+    chartArea.appendChild(minLabel);
+
+
+    /* =================================================
+       CREATE POINTS
+    ================================================= */
+
+    pnlData.forEach((item, index) => {
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "pnl-point-wrapper";
+
+
+        const x =
+            pnlData.length === 1
+            ? 50
+            : (index /
+            (pnlData.length - 1)) *
+            90 + 5;
+
+
+        const y =
+            ((maxValue - item.value) /
+            (maxValue - minValue)) *
+            100;
+
+
+        wrapper.style.left =
+            x + "%";
+
+
+        wrapper.style.top =
+            y + "%";
+
+
+        /* POINT */
+
+        const point =
+            document.createElement("div");
+
+
+        point.className =
+            "pnl-point";
+
+
+        if (item.value < 0) {
+
+            point.classList.add("loss");
+
+        }
+
+        else {
+
+            point.classList.add("profit");
+
+        }
+
+
+        /* VALUE */
+
+        const value =
+            document.createElement("div");
+
+
+        value.className =
+            "pnl-value";
+
+
+        value.textContent =
+            item.value === 0
+            ? "₹0"
+            : (item.value > 0 ? "+" : "-") +
+              "₹" +
+              Math.abs(item.value);
+
+
+        /* MONTH */
+
+        const month =
+            document.createElement("div");
+
+
+        month.className =
+            "pnl-month";
+
+
+        month.textContent =
+            item.month;
+
+
+        wrapper.appendChild(value);
+
+        wrapper.appendChild(point);
+
+        wrapper.appendChild(month);
+
+
+        chartArea.appendChild(wrapper);
+
+    });
+
+
+  /* ---------------------------------------------
+   CONNECTING LINES
+--------------------------------------------- */
+
+setTimeout(function () {
+
+    const chartWidth =
+        chartArea.clientWidth;
+
+    const chartHeight =
+        chartArea.clientHeight;
+
+
+    for (
+        let i = 0;
+        i < pnlData.length - 1;
+        i++
+    ) {
+
+        const current =
+            pnlData[i];
+
+        const next =
+            pnlData[i + 1];
+
+
+        /* X POSITION */
+
+        const currentX =
+            ((i /
+            Math.max(pnlData.length - 1, 1)) *
+            90 + 5) / 100 *
+            chartWidth;
+
+
+        const nextX =
+            (((i + 1) /
+            Math.max(pnlData.length - 1, 1)) *
+            90 + 5) / 100 *
+            chartWidth;
+
+
+        /* Y POSITION */
+
+        const currentY =
+            ((maxValue - current.value) /
+            (maxValue - minValue)) *
+            chartHeight;
+
+
+        const nextY =
+            ((maxValue - next.value) /
+            (maxValue - minValue)) *
+            chartHeight;
+
+
+        /* DISTANCE */
+
+        const dx =
+            nextX - currentX;
+
+        const dy =
+            nextY - currentY;
+
+
+        const distance =
+            Math.sqrt(
+                dx * dx +
+                dy * dy
+            );
+
+
+        /* ANGLE */
+
+        const angle =
+            Math.atan2(dy, dx) *
+            180 / Math.PI;
+
+
+        /* LINE */
+
+        const line =
+            document.createElement("div");
+
+
+        line.className =
+            "pnl-connection";
+
+
+        line.style.width =
+            distance + "px";
+
+
+        line.style.left =
+            currentX + "px";
+
+
+        line.style.top =
+            currentY + "px";
+
+
+        line.style.transform =
+            "rotate(" +
+            angle +
+            "deg)";
+
+
+        chartArea.appendChild(line);
+
+    }
+
+}, 50);
+
+
+    /* =================================================
+       ADD GRAPH
+    ================================================= */
+
+    graph.appendChild(chartArea);
+
+
+    /* =================================================
+       TOTAL P&L
+    ================================================= */
+
+    const total =
+        calculatePNLTotal();
+
+
+    const totalBox =
+        document.createElement("div");
+
+
+    totalBox.className =
+        "pnl-total";
+
+
+    const totalStatus =
+        total > 0
+        ? "PROFIT"
+        : total < 0
+        ? "LOSS"
+        : "NO DATA";
+
+
+    totalBox.innerHTML = `
+
+        <small>TOTAL P&L</small>
+
+        <strong class="${
+            total > 0
+            ? "green"
+            : total < 0
+            ? "red"
+            : "orange"
+        }">
+
+            ${total >= 0 ? "+" : ""}
+            ${formatMoney(total)}
+
+        </strong>
+
+        <span>${totalStatus}</span>
+
+    `;
+
+
+    graph.appendChild(totalBox);
+
+
+    graphBox.appendChild(graph);
+
+}
+
+
+/* =====================================================
+   UPDATE MONTHLY P&L CARDS
+===================================================== */
+
+function updateMonthlyCards() {
+
+    const cards =
+        document.querySelectorAll(".monthly-card");
+
+
+    if (!cards.length) {
+        return;
+    }
+
+
+    cards.forEach((card, index) => {
+
+        if (!pnlData[index]) {
+            return;
+        }
+
+
+        const data =
+            pnlData[index];
+
+
+        const value =
+            card.querySelector("strong");
+
+
+        const status =
+            card.querySelector("span");
+
+
+        if (value) {
+
+            value.textContent =
+                formatMoney(data.value);
+
+        }
+
+
+        if (status) {
+
+            if (data.value > 0) {
+
+                status.textContent =
+                    "PROFIT";
+
+                status.className =
+                    "profit-text";
+
+            }
+
+            else if (data.value < 0) {
+
+                status.textContent =
+                    "LOSS";
+
+                status.className =
+                    "loss-text";
+
+            }
+
+            else {
+
+                status.textContent =
+                    "NO DATA";
+
+                status.className =
+                    "neutral-text";
+
+            }
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   UPDATE P&L SUMMARY
+===================================================== */
+
+function updatePNLSummary() {
+
+    const total =
+        calculatePNLTotal();
+
+
+    const totalElement =
+        document.getElementById("totalPnl");
+
+
+    const statusElement =
+        document.getElementById("pnlStatus");
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            formatMoney(total);
+
+    }
+
+
+    if (statusElement) {
+
+        if (total > 0) {
+
+            statusElement.textContent =
+                "PROFIT";
+
+            statusElement.className =
+                "green";
+
+        }
+
+        else if (total < 0) {
+
+            statusElement.textContent =
+                "LOSS";
+
+            statusElement.className =
+                "red";
+
+        }
+
+        else {
+
+            statusElement.textContent =
+                "NO DATA";
+
+            statusElement.className =
+                "orange";
+
+        }
+
+    }
+
+}
 
 
 /* =====================================================
@@ -265,22 +990,14 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        // Organisation
-        if (typeof updateOrganisationCard === "function") {
-            updateOrganisationCard();
-        }
+        updateOrganisationCard();
 
-        // Monthly cards
-        if (typeof updateMonthlyCards === "function") {
-            updateMonthlyCards();
-        }
+        updateMonthlyCards();
 
-        // P&L removed — no P&L functions needed
+        updatePNLSummary();
 
-        // Weekend MVP
-        if (typeof createMVPCards === "function") {
-            createMVPCards();
-        }
+        createPNLGraph();
+
 
         console.log(
             "RAMPAGE OFFICIAL WEBSITE LOADED."
