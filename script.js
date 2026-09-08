@@ -1068,7 +1068,7 @@ const weekendMVPData = [
 
    {
         week: "SEPTEMBER WEEK 01",
-        weak: "RAMPAGE ESPORTS Z",
+        week: "RAMPAGE ESPORTS Z",
         poster: "./mvp-sep-w013.jpeg"
     },
 
