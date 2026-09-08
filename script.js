@@ -1063,12 +1063,13 @@ const weekendMVPData = [
 
     {
         week: "AUGUST WEEK 04",
+        team: "RAMPAGE ESPORTS Y",
         poster: "./mvp-aug-w04.jpeg"
     },
 
    {
         week: "SEPTEMBER WEEK 01",
-        week: "RAMPAGE ESPORTS Z",
+        team: "RAMPAGE ESPORTS Y",
         poster: "./mvp-sep-w013.jpeg"
     },
 
@@ -1118,6 +1119,10 @@ function createMVPCards() {
                     RAMPAGE WEEKEND MVP
                 </div>
 
+                 <h2>
+                    ${mvp.team}
+                </h2>
+                
                 <h2>
                     ${mvp.week}
                     <span>MVP</span>
