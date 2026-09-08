@@ -1062,15 +1062,26 @@ console.log(`
 const weekendMVPData = [
 
     {
-        week: "AUGUST WEEK 04",
+        week: "AUG 26 WEEK 04",
         team: "RAMPAGE ESPORTS Y",
         poster: "./mvp-aug-w04.jpeg"
     },
 
    {
-        week: "SEPTEMBER WEEK 01",
+        week: "SEP 26 WEEK 01",
+        team: "RAMPAGE ESPORTS X",
+        poster: "./mvp-sep-w01x.jpeg"
+    },
+
+   {
+        week: "SEP 26 WEEK 01",
         team: "RAMPAGE ESPORTS Y",
         poster: "./mvp-sep-w013.jpeg"
+    },
+   {
+        week: "SEP 26 WEEK 01",
+        team: "RAMPAGE ESPORTS Z",
+        poster: "./mvp-sep-w01z.jpeg"
     },
 
 ];
