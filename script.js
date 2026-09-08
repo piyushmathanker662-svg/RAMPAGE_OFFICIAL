@@ -272,7 +272,7 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 3981,
+    amountOfSlots: 4236,
 
     totalEarning: 6295,
 
@@ -383,7 +383,7 @@ const pnlData = [
 
    {
         month: "September 2026",
-        value: 491
+        value: 382
     }
 
 ];
@@ -1068,6 +1068,7 @@ const weekendMVPData = [
 
    {
         week: "SEPTEMBER WEEK 01",
+        weak: "RAMPAGE ESPORTS Z",
         poster: "./mvp-sep-w013.jpeg"
     },
 
