@@ -95,11 +95,11 @@ function openPage(pageId) {
 
 
     // Create P&L graph whenever P&L page opens
-    if (pageId === "pnlPage") {
+    // if (pageId === "pnlPage") {
 
-        setTimeout(() => {
-            createPNLGraph();
-        }, 200);
+    //     setTimeout(() => {
+    //         createPNLGraph();
+    //     }, 200);
 
     }
 
@@ -272,13 +272,13 @@ const organisationData = {
 
     name: "RAMPAGE ESPORTS ACCOUNT",
 
-    amountOfSlots: 4236,
+    amountOfSlots: 4531,
 
-    totalEarning: 6295,
+    totalEarning: 7105,
 
-    salaryExpense: 2235,
+    salaryExpense: 2388,
 
-    profitLoss: 2080
+    profitLoss: 2362
 
 };
 
