@@ -94,7 +94,7 @@ function openPage(pageId) {
     }, 100);
 
 
-    Create P&L graph whenever P&L page opens
+    //Create P&L graph whenever P&L page opens
     if (pageId === "pnlPage") {
 
         setTimeout(() => {
