@@ -94,12 +94,12 @@ function openPage(pageId) {
     }, 100);
 
 
-    // Create P&L graph whenever P&L page opens
-    // if (pageId === "pnlPage") {
+    Create P&L graph whenever P&L page opens
+    if (pageId === "pnlPage") {
 
-    //     setTimeout(() => {
-    //         createPNLGraph();
-    //     }, 200);
+        setTimeout(() => {
+            createPNLGraph();
+        }, 200);
 
     }
 
@@ -363,27 +363,27 @@ const pnlData = [
 
     {
         month: "May 2026",
-        value: 385
+        value: 000
     },
 
     {
         month: "June 2026",
-        value: 673
+        value: 000
     },
 
     {
         month: "July 2026",
-        value: 10
+        value: 000
     },
 
     {
         month: "August 2026",
-        value: 521
+        value: 000
     },
 
    {
         month: "September 2026",
-        value: 382
+        value: 000
     }
 
 ];
